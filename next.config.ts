@@ -1,8 +1,9 @@
-import withLinaria from 'next-with-linaria';
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  compiler: {
+    emotion: true,
+  },
 };
 
-export default withLinaria(nextConfig);
+export default nextConfig;
