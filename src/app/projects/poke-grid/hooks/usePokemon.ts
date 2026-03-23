@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { getAllPokemon, getPokemon } from "../api/pokemon";
-import type { Pokemon } from "../types/pokemon";
+import type { Pokemon, PokemonListItem } from "../types/pokemon";
 
 export function usePokemon(name: string) {
   return useQuery<Pokemon, Error>({
@@ -13,7 +13,7 @@ export function usePokemon(name: string) {
 }
 
 export function useAllPokemon() {
-  return useQuery<Pokemon[], Error>({
+  return useQuery<PokemonListItem[], Error>({
     queryKey: ["pokemon"],
     queryFn: () => getAllPokemon(),
   })

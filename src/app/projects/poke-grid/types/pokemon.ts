@@ -10,6 +10,13 @@ export interface Pokemon {
   // stats: PokemonStat[];
 }
 
+export interface PokemonListItem {
+  name: string;
+  url: string;
+  id: string;
+  image: string;
+}
+
 export interface PokemonSprites {
   front_default: string | null;
   other: {
