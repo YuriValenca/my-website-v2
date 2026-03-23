@@ -19,6 +19,12 @@ export const theme = {
     100: "100px",
     HUEG: "256px",
   },
+  borderRadius: {
+    none: "0",
+    small: "4px",
+    medium: "8px",
+    circle: "50%",
+  },
   fontSize: {
     tooltip: "10px",
     sm: "12px",
