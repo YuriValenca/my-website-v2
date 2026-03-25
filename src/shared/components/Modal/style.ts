@@ -52,10 +52,21 @@ const slideOutBottom = keyframes`
   to { transform: translateY(100%); }
 `;
 
+const slideInTop = keyframes`
+  from { transform: translateX(-50%) scale(0.96); opacity: 0; }
+  to { transform: translateX(-50%) scale(1); opacity: 1; }
+`;
+
+const slideOutTop = keyframes`
+  from { transform: translateX(-50%) scale(1); opacity: 1; }
+  to { transform: translateX(-50%) scale(0.96); opacity: 0; }
+`;
+
 const getContainerAnimation = (position: string, isClosing: boolean) => {
   if (position === "right") return isClosing ? slideOutRight : slideInRight;
   if (position === "left") return isClosing ? slideOutLeft : slideInLeft;
   if (position === "bottom") return isClosing ? slideOutBottom : slideInBottom;
+  if (position === "top") return isClosing ? slideOutTop : slideInTop;
   return isClosing ? slideOutCenter : slideInCenter;
 };
 
@@ -65,6 +76,7 @@ export const ModalOverlay = styled.div<{ isClosing: boolean }>`
   background: rgba(0, 0, 0, 0.6);
   z-index: 100;
   animation: ${({ isClosing }) => isClosing ? fadeOut : fadeIn} 0.3s ease forwards;
+  cursor: default;
 `;
 
 export const ModalContainer = styled.div<{ position: string; isClosing: boolean }>`
@@ -73,6 +85,10 @@ export const ModalContainer = styled.div<{ position: string; isClosing: boolean 
   border-radius: ${theme.borderRadius.medium};
   padding: ${theme.spacing.medium};
   z-index: 101;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   animation: ${({ position, isClosing }) => getContainerAnimation(position, isClosing)} 0.3s ease forwards;
 
   ${({ position }) => position === "center" && `
@@ -100,6 +116,17 @@ export const ModalContainer = styled.div<{ position: string; isClosing: boolean 
     width: 100%;
     border-radius: 8px 8px 0 0;
   `}
+
+  ${({ position }) => position === "top" && `
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+  `}
+`;
+
+export const ModalTitle = styled.h4`
+  font-size: ${theme.fontSize.h4};
+  text-align: center;
 `;
 
 export const ModalContent = styled.div`
