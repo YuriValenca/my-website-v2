@@ -26,8 +26,8 @@ async function getAllPokemon(): Promise<PokemonListItem[]> {
   });
 }
 
-async function getPokemon(name: string): Promise<Pokemon> {
-  const res = await fetch(`${BASE_URL}/${name}`);
+async function getPokemon(url: string): Promise<Pokemon> {
+  const res = await fetch(url);
 
   if (!res.ok) {
     throw new Error (`Failed to fetch pokemon: ${res.status}`)
