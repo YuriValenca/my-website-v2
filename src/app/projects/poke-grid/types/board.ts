@@ -1,5 +1,6 @@
 import { StaticImageData } from "next/image";
 import { PokemonTypeName } from "@/shared/constants/pokemonTypes";
+import { PokemonListItem } from "./pokemon";
 
 export type PokemonType = {
   name: PokemonTypeName;
@@ -14,3 +15,8 @@ export type PokeGridBoard = {
   columnTypes: PokemonType[];
   cells: TypePair[][];
 }
+
+export type CellState =
+  | { status: "empty" }
+  | { status: "wrong"; pokemon: PokemonListItem }
+  | { status: "correct"; pokemon: PokemonListItem };
