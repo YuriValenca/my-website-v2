@@ -73,7 +73,7 @@ const getContainerAnimation = (position: string, isClosing: boolean) => {
 export const ModalOverlay = styled.div<{ isClosing: boolean }>`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: ${theme.colors.background.overlay};
   z-index: 100;
   animation: ${({ isClosing }) => isClosing ? fadeOut : fadeIn} 0.3s ease forwards;
   cursor: default;
@@ -81,7 +81,7 @@ export const ModalOverlay = styled.div<{ isClosing: boolean }>`
 
 export const ModalContainer = styled.div<{ position: string; isClosing: boolean }>`
   position: fixed;
-  background: #1e1e2e;
+  background: ${theme.colors.background.surface};
   border-radius: ${theme.borderRadius.medium};
   padding: ${theme.spacing.medium};
   z-index: 101;
@@ -100,21 +100,18 @@ export const ModalContainer = styled.div<{ position: string; isClosing: boolean 
     top: 0;
     right: 0;
     height: 100%;
-    border-radius: 8px 0 0 8px;
   `}
 
   ${({ position }) => position === "left" && `
     top: 0;
     left: 0;
     height: 100%;
-    border-radius: 0 8px 8px 0;
   `}
 
   ${({ position }) => position === "bottom" && `
     bottom: 0;
     left: 0;
     width: 100%;
-    border-radius: 8px 8px 0 0;
   `}
 
   ${({ position }) => position === "top" && `
