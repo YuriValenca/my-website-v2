@@ -1,4 +1,3 @@
-import { POKEMON_TYPES, PokemonTypeName } from '@/shared/constants/pokemonTypes'
 import { StaticImageData } from 'next/image'
 import { removeItemFromList } from '@/shared/utils/arrayUtils'
 
@@ -21,7 +20,9 @@ import rockImg from '../../../../shared/assets/images/rock.png'
 import steelImg from '../../../../shared/assets/images/steel.png'
 import waterImg from '../../../../shared/assets/images/water.png'
 
-export const typeImages: Record<PokemonTypeName, StaticImageData> = {
+// 'satisfies' validates values as StaticImageData
+// while keeping literal keys for type inference
+export const typeImages = {
   bug: bugImg,
   dark: darkImg,
   dragon: dragonImg,
@@ -40,7 +41,9 @@ export const typeImages: Record<PokemonTypeName, StaticImageData> = {
   rock: rockImg,
   steel: steelImg,
   water: waterImg,
-};
+} satisfies Record<string, StaticImageData>;
+
+export type PokemonTypeName = keyof typeof typeImages;
 
 // Type combinations not yet used on a Canon Pokemon
 // Would block the user from ever finishing the game
@@ -75,7 +78,7 @@ const isTypeCombinationValid = (
   );
 };
 
-const getAllTypes = (): PokemonTypeName[] => Object.keys(POKEMON_TYPES) as PokemonTypeName[];
+const getAllTypes = (): PokemonTypeName[] => Object.keys(typeImages) as PokemonTypeName[];
 
 const pickRandomType = (types: PokemonTypeName[]): PokemonTypeName => {
   const randomIndex = Math.floor(Math.random() * types.length);
