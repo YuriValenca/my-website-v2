@@ -87,7 +87,7 @@ const PokeGrid = () => {
   }
   
   const userScore = () => (
-    <ScoreWrapper mobile={isMobile}>
+    <ScoreWrapper key="user-score" mobile={isMobile}>
       Your score:
       <p key="score"> {currentScore} / 9</p>
     </ScoreWrapper>
@@ -103,7 +103,7 @@ const PokeGrid = () => {
       <PokeGridContent>
         {Array.from({ length: 4 }, (_, row) =>
           Array.from({ length: isMobile ? 4 : 5 }, (_, col) => {            
-            if ((row === 0 && col === 0) || (col === 4 && row === 0)) return <div key="corner" />;
+            if ((row === 0 && col === 0) || (col === 4 && row === 0)) return <div key={`corner-${row}${col}`} />;
             if (col === 4 && row === 2) return userScore();
             if (col === 4) return <div key={`empty-${row}`} />;
             
