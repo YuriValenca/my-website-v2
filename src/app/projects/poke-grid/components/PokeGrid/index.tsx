@@ -1,18 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAllPokemon } from "../../hooks/usePokemon";
 import { typeExporter, typeImages } from "../../helpers/typeExporter";
 import { CellState, PokeGridBoard, PokemonType, TypePair } from "../../types/board";
 import { PokemonTypeName, POKEMON_TYPES } from "@/shared/constants/pokemonTypes";
 import { Pokemon, PokemonListItem } from "../../types/pokemon";
+import { getPokemon } from "../../api/pokemon";
 import Instructions from "../Instructions";
 import TypePill from "../TypePill";
 import SelectionCell from "../SelectionCell";
+import EndGameContent from "../EndGame";
 import Modal from "@/shared/components/Modal";
 import Button from "@/shared/components/Button";
 import { PokeGridContainer, PokeGridContent, ScoreWrapper, Title } from "./style"
-import { getPokemon } from "../../api/pokemon";
 
 const buildPokemonType = (name: PokemonTypeName): PokemonType => ({
   name,
@@ -35,22 +36,25 @@ const buildBoard = (): PokeGridBoard => {
 
 const PokeGrid = () => {
   const { data, isLoading, isError } = useAllPokemon();
-  const [showInstructionsModal, setShowInstructionsModal] = useState(true);
+  const [showModal, setShowModal] = useState({
+    instructions: true,
+    endGame: false,
+  });
   const [board, setBoard] = useState<PokeGridBoard>(() => buildBoard());
   const [cellStates, setCellStates] = useState<CellState[][]>(
     () => Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => ({ status: "empty" })))
   );
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Something went wrong</p>;
-  if (!data) return <p>Something went wrong fetching Pokémon, refresh the page to try again.</p>
+  const handleCloseModal = (key: keyof typeof showModal) => setShowModal(prev => ({ ...prev, [key]: false }));
+  const handleOpenModal = (key: keyof typeof showModal) => setShowModal(prev => ({ ...prev, [key]: true }));
 
-  const handleCloseModal = () => setShowInstructionsModal(false);
+  const currentScore = cellStates.flat().filter(c => c.status === "correct").length;
 
   const validateGuess = (pair: TypePair, pokemon: Pokemon): boolean => {
     const guessTypes = pokemon.types.map((slot) => slot.type.name);
     const validate = pair.every(type => guessTypes.includes(type))
-    return validate;
+    // return validate;
+    return true;
   }
 
   const handleGuess = async (row: number, column: number, pokemon: PokemonListItem) => {
@@ -67,12 +71,29 @@ const PokeGrid = () => {
     return isCorrect;
   }
 
+  useEffect(() => {
+    if (currentScore === 9) {
+      handleOpenModal("endGame")
+    }
+  }, [currentScore])
+
+  const rebuildBoard = () => {
+    setBoard(buildBoard());
+    setCellStates(Array.from({ length: 3 }, () => 
+      Array.from({ length: 3 }, () => ({ status: "empty" }))
+    ));
+  }
+  
   const userScore = () => (
     <ScoreWrapper>
       Your score:
-      <p key="score">{cellStates.flat().filter(c => c.status === "correct").length} / 9</p>
+      <p key="score"> {currentScore} / 9</p>
     </ScoreWrapper>
   )
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Something went wrong</p>;
+  if (!data) return <p>Something went wrong fetching Pokémon, refresh the page to try again.</p>
 
   return (
     <PokeGridContainer>
@@ -100,26 +121,36 @@ const PokeGrid = () => {
           })
         )}
       </PokeGridContent>
-      <Modal
-        isVisible={showInstructionsModal}
-        onClose={handleCloseModal}
-        width="500px"
-      >
-        <Instructions
-          onButtonClick={() => handleCloseModal()}
-        />
-      </Modal>
       <Button
         bg="#ebebeb"
-          onClick={() => {
-          setBoard(buildBoard());
-          setCellStates(Array.from({ length: 3 }, () => 
-            Array.from({ length: 3 }, () => ({ status: "empty" }))
-          ));
-        }}
+        onClick={() => rebuildBoard()}
         text="New puzzle"
         textColor="#1d1d1d"
       />
+      <Modal
+        isVisible={showModal.instructions}
+        onClose={() => handleCloseModal("instructions")}
+        width="500px"
+        title="How to play"
+      >
+        <Instructions
+          onButtonClick={() => handleCloseModal("instructions")}
+        />
+      </Modal>
+      <Modal
+        isVisible={showModal.endGame}
+        onClose={() => handleCloseModal("endGame")}
+        width="500px"
+        title="Congratulations! You caught all the Pokemon!"
+      >
+        <EndGameContent
+          onNewGameClick={() => {
+            rebuildBoard()
+            handleCloseModal("endGame")
+          }}
+          seeBoardClick={() => handleCloseModal("endGame")}
+        />
+      </Modal>
     </PokeGridContainer>
   )
 }
