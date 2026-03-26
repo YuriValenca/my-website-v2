@@ -1,5 +1,5 @@
 import Button from "@/shared/components/Button";
-import { InstructionsButtonWrapper, InstructionsContainer, InstructionsList, ListItem, ModalTitle } from "./style"
+import { InstructionsButtonWrapper, InstructionsContainer, InstructionsList, ListItem } from "./style"
 
 interface InstructionsProps {
   onButtonClick: () => void;
@@ -10,9 +10,6 @@ const Instructions = ({
 }: InstructionsProps) => {
   return (
     <InstructionsContainer>
-      <ModalTitle>
-        How to play
-      </ModalTitle>
       <InstructionsList>
         <ListItem>
           → The goal is to fill all 9 with the correct pokemon, according to the types on the left and top.

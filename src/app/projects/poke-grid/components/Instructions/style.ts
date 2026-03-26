@@ -9,11 +9,6 @@ export const InstructionsContainer = styled.div`
   justify-content: center;
 `;
 
-export const ModalTitle = styled.h3`
-  font-size: ${theme.fontSize.h3};
-  margin-bottom: ${theme.spacing.small};
-`;
-
 export const InstructionsList = styled.ul`
   list-style: none;
   font-size: ${theme.fontSize.normal};
