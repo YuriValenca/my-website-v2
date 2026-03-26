@@ -1,5 +1,6 @@
 import Button from "@/shared/components/Button";
 import { ButtonsContainer, EndGameContainer, EndGameText } from "./style"
+import { theme } from "@/shared/theme/theme";
 
 interface EndGameContentProps {
   onNewGameClick: () => void;
@@ -15,15 +16,15 @@ const EndGameContent = ({
       <EndGameText>You can play a new game, or take a look at the board you filled.</EndGameText>
       <ButtonsContainer>
         <Button
-          bg="#F2CB07"
-          textColor="#1d1d1d"
+          bg={theme.colors.accent.yellow}
+          textColor={theme.colors.text.dark}
           text="New game"
           onClick={onNewGameClick}
         />
         <EndGameText>or</EndGameText>
         <Button
-          bg="#F2CB07"
-          textColor="#1d1d1d"
+          bg={theme.colors.accent.yellow}
+          textColor={theme.colors.text.dark}
           text="See board"
           onClick={seeBoardClick}
         />

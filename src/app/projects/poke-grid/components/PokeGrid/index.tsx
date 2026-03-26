@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useAllPokemon } from "../../hooks/usePokemon";
+import { useBreakpoint } from "@/shared/hooks/useBreakpoint";
 import { typeExporter, typeImages } from "../../helpers/typeExporter";
 import { CellState, PokeGridBoard, PokemonType, TypePair } from "../../types/board";
 import { PokemonTypeName, POKEMON_TYPES } from "@/shared/constants/pokemonTypes";
@@ -13,6 +14,7 @@ import SelectionCell from "../SelectionCell";
 import EndGameContent from "../EndGame";
 import Modal from "@/shared/components/Modal";
 import Button from "@/shared/components/Button";
+import { theme } from "@/shared/theme/theme";
 import { PokeGridContainer, PokeGridContent, ScoreWrapper, Title } from "./style"
 
 const buildPokemonType = (name: PokemonTypeName): PokemonType => ({
@@ -44,6 +46,8 @@ const PokeGrid = () => {
   const [cellStates, setCellStates] = useState<CellState[][]>(
     () => Array.from({ length: 3 }, () => Array.from({ length: 3 }, () => ({ status: "empty" })))
   );
+
+  const isMobile = useBreakpoint("md");
 
   const handleCloseModal = (key: keyof typeof showModal) => setShowModal(prev => ({ ...prev, [key]: false }));
   const handleOpenModal = (key: keyof typeof showModal) => setShowModal(prev => ({ ...prev, [key]: true }));
@@ -85,7 +89,7 @@ const PokeGrid = () => {
   }
   
   const userScore = () => (
-    <ScoreWrapper>
+    <ScoreWrapper mobile={isMobile}>
       Your score:
       <p key="score"> {currentScore} / 9</p>
     </ScoreWrapper>
@@ -100,7 +104,7 @@ const PokeGrid = () => {
       <Title>Today's puzzle:</Title>
       <PokeGridContent>
         {Array.from({ length: 4 }, (_, row) =>
-          Array.from({ length: 5 }, (_, col) => {            
+          Array.from({ length: isMobile ? 4 : 5 }, (_, col) => {            
             if ((row === 0 && col === 0) || (col === 4 && row === 0)) return <div key="corner" />;
             if (col === 4 && row === 2) return userScore();
             if (col === 4) return <div key={`empty-${row}`} />;
@@ -121,16 +125,17 @@ const PokeGrid = () => {
           })
         )}
       </PokeGridContent>
+      {isMobile && userScore()}
       <Button
-        bg="#ebebeb"
+        bg={theme.colors.neutral.gray100}
         onClick={() => rebuildBoard()}
         text="New puzzle"
-        textColor="#1d1d1d"
+        textColor={theme.colors.text.dark}
       />
       <Modal
         isVisible={showModal.instructions}
         onClose={() => handleCloseModal("instructions")}
-        width="500px"
+        width={isMobile ? "90%" : "500px"}
         title="How to play"
       >
         <Instructions
@@ -140,7 +145,7 @@ const PokeGrid = () => {
       <Modal
         isVisible={showModal.endGame}
         onClose={() => handleCloseModal("endGame")}
-        width="500px"
+        width={isMobile ? "90%" : "500px"}
         title="Congratulations! You caught all the Pokemon!"
       >
         <EndGameContent

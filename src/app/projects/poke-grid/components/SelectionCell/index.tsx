@@ -4,6 +4,7 @@ import { PokemonListItem } from "../../types/pokemon"
 import Modal from "@/shared/components/Modal";
 import Input from "@/shared/components/Input";
 import { capitalizeString } from "@/shared/utils/stringUtils";
+import { useBreakpoint } from "@/shared/hooks/useBreakpoint";
 import { PairTypes, SelectionCellModalArea, SolvedPokemonImage, SuggestionItem, SuggestionPokemonImage, SuggestionsInputWrapper, SuggestionsWrapper } from "./style";
 
 const MIN_CHARS = 3;
@@ -31,6 +32,8 @@ const SelectionCell = ({
     if (userGuess.length < MIN_CHARS) return [];
     return allPokemon.filter(pokemon => pokemon.name.includes(userGuess.toLowerCase()));
   }, [userGuess, allPokemon]);
+
+  const isMobile = useBreakpoint("md")
 
   const showNoResults = userGuess.length >= MIN_CHARS && suggestions.length === 0;
 
@@ -71,7 +74,7 @@ const SelectionCell = ({
         position="top"
         isVisible={openSelectionModal}
         onClose={handleCloseModal}
-        width="550px"
+        width={isMobile ? "90%" : "500px"}
         title="Make your guess!"
       >
         <PairTypes>
