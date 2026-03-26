@@ -2,14 +2,14 @@ import { theme } from "@/shared/theme/theme";
 import styled from "@emotion/styled";
 
 export const SelectionCellModalArea = styled.div<{ solved?: boolean }>`
-  background-color: ${({ solved }) => solved ? "transparent" : "#ebebeb"};
+  background-color: ${({ solved }) => solved ? "transparent" : theme.colors.neutral.gray100};
   width: 100%;
   height: 100%;
   cursor: ${({ solved }) => solved ? "default" : "pointer"};
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: ${({ solved }) => solved ? "transparent" : "#d4d4d4"};
+    background-color: ${({ solved }) => solved ? "transparent" : theme.colors.neutral.gray200};
   }
 `;
 
@@ -22,6 +22,7 @@ export const SelectionCellModalArea = styled.div<{ solved?: boolean }>`
 export const PairTypes = styled.p`
   text-align: center;
   font-weight: bold;
+  color: ${theme.colors.text.primary};
   margin-bottom: ${theme.spacing.small};
 `;
 
@@ -46,12 +47,12 @@ export const SuggestionsWrapper = styled.ul`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #515151;
+    background-color: ${theme.colors.neutral.gray600};
     border-radius: 999px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: #787878;
+    background-color: ${theme.colors.neutral.gray400};
   }
 `;
 
@@ -63,9 +64,14 @@ export const SuggestionItem = styled.li`
   cursor: pointer;
   background-color: "transparent";
   border-radius: ${theme.borderRadius.small};
+  color: ${theme.colors.text.primary};
 
   &:hover {
-    background-color: #515151;
+    background-color: ${theme.colors.background.surfaceHover};
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.none};
   }
 `;
 

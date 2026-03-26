@@ -1,6 +1,5 @@
-
-import Image from "next/image";
 import { PokemonType } from "../../types/board";
+import { PillImage } from "./style";
 
 interface TypePillProps {
   type: PokemonType;
@@ -8,11 +7,9 @@ interface TypePillProps {
 
 const TypePill = ({ type }: TypePillProps) => {
   return (
-    <Image
+    <PillImage
       src={type.image}
       alt={`${type.name} type`}
-      width={100}
-      style={{ display: 'block' }}
     />
   );
 }

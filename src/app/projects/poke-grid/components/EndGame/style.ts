@@ -22,4 +22,9 @@ export const ButtonsContainer = styled.div`
   width: 80%;
   height: auto;
   margin-top: ${theme.spacing.default};
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    width: 100%;
+    flex-direction: column;
+  }
 `;

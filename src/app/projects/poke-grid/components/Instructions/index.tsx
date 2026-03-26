@@ -1,4 +1,5 @@
 import Button from "@/shared/components/Button";
+import { theme } from "@/shared/theme/theme";
 import { InstructionsButtonWrapper, InstructionsContainer, InstructionsList, ListItem } from "./style"
 
 interface InstructionsProps {
@@ -26,10 +27,10 @@ const Instructions = ({
       </InstructionsList>
       <InstructionsButtonWrapper>
         <Button
-          bg="#CC2C21"
+          bg={theme.colors.accent.red}
           onClick={onButtonClick}
           text="Got it!"
-          textColor="#F5F5F5"
+          textColor={theme.colors.text.primary}
         />
       </InstructionsButtonWrapper>
     </InstructionsContainer>
