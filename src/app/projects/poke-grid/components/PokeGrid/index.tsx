@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { useAllPokemon } from "../../hooks/usePokemon";
 import { useBreakpoint } from "@/shared/hooks/useBreakpoint";
-import { typeExporter, typeImages } from "../../helpers/typeExporter";
+import { PokemonTypeName, typeExporter, typeImages } from "../../helpers/typeExporter";
 import { CellState, PokeGridBoard, PokemonType, TypePair } from "../../types/board";
-import { PokemonTypeName, POKEMON_TYPES } from "@/shared/constants/pokemonTypes";
 import { Pokemon, PokemonListItem } from "../../types/pokemon";
 import { getPokemon } from "../../api/pokemon";
 import Instructions from "../Instructions";
@@ -14,13 +13,12 @@ import SelectionCell from "../SelectionCell";
 import EndGameContent from "../EndGame";
 import Modal from "@/shared/components/Modal";
 import Button from "@/shared/components/Button";
-import { theme } from "@/shared/theme/theme";
 import { PokeGridContainer, PokeGridContent, ScoreWrapper, Title } from "./style"
+import { theme } from "@/shared/theme/theme";
 
 const buildPokemonType = (name: PokemonTypeName): PokemonType => ({
   name,
   image: typeImages[name],
-  color: POKEMON_TYPES[name],
 });
 
 const buildBoard = (): PokeGridBoard => {

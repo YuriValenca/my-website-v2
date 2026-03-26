@@ -1,11 +1,10 @@
 import { StaticImageData } from "next/image";
-import { PokemonTypeName } from "@/shared/constants/pokemonTypes";
 import { PokemonListItem } from "./pokemon";
+import { PokemonTypeName } from "../helpers/typeExporter";
 
 export type PokemonType = {
   name: PokemonTypeName;
   image: StaticImageData;
-  color: string;
 }
 
 export type TypePair = [PokemonTypeName, PokemonTypeName];
