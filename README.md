@@ -20,4 +20,4 @@ Before opening a pull request, please read the [Commit Style Guide](.github/COMM
 
 ## Author
 
-[Yuri Valença](https://www.linkedin.com/in/yuri-valença/)
+[Yuri Valença](https://www.linkedin.com/in/yuri-valenca)
