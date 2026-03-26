@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { QueryProvider } from './components/queryProvider'
+import { QueryProvider } from '../shared/components/queryProvider'
+import { notoSansFont } from '@/shared/theme/theme'
 
 export const metadata: Metadata = {
   title: 'Yuri Valença - Portfolio',
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={notoSansFont.variable}>
       <body className="bg-gray-900 text-white antialiased">
         <QueryProvider>
           {children}
