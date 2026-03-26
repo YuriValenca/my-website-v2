@@ -16,9 +16,8 @@ const borderRadiusGrid = (
 
 export const PokeGridContainer = styled.div`
   background-color: ${theme.colors.background.page};
-  height: 100dvh;
+  height: calc(100dvh - (${theme.spacing.xxxlarge} + ${theme.spacing.huge}));
   width: 100dvw;
-  padding-bottom: ${theme.spacing[100]};
 
   display: flex;
   flex-direction: column;

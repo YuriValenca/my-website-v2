@@ -1,4 +1,5 @@
 import { StyledButton } from "./style";
+import { ReactNode } from "react";
 
 interface ButtonProps {
   text: string;
@@ -6,6 +7,8 @@ interface ButtonProps {
   textColor: string;
   onClick: () => void;
   isBold?: Boolean;
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
 }
 
 const Button = ({
@@ -14,14 +17,19 @@ const Button = ({
   textColor,
   onClick,
   isBold = false,
+  icon,
+  iconPosition = "left",
 }: ButtonProps) => {
   return (
     <StyledButton
       data-bold={isBold}
+      data-icon-position={iconPosition}
       onClick={onClick}
       style={{ backgroundColor: bg, color: textColor }}
     >
+      {icon && iconPosition === "left" && icon}
       {text}
+      {icon && iconPosition === "right" && icon}
     </StyledButton>
   )
 }

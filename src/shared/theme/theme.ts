@@ -81,6 +81,7 @@ export const theme = {
   fontSize: {
     tooltip: "10px",
     sm: "12px",
+    md: "14px",
     normal: "16px",
     h5: "20px",
     h4: "24px",
