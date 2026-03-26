@@ -8,10 +8,10 @@ const borderRadiusGrid = (
   bottomLeft: number,
   bottomRight: number
 ) => css`
-  > *:nth-child(${topLeft}) { border-top-left-radius: ${theme.borderRadius.medium}; }
-  > *:nth-child(${topRight}) { border-top-right-radius: ${theme.borderRadius.medium}; }
-  > *:nth-child(${bottomLeft}) { border-bottom-left-radius: ${theme.borderRadius.medium}; }
-  > *:nth-child(${bottomRight}) { border-bottom-right-radius: ${theme.borderRadius.medium}; }
+  > *:nth-of-type(${topLeft}) { border-top-left-radius: ${theme.borderRadius.medium}; }
+  > *:nth-of-type(${topRight}) { border-top-right-radius: ${theme.borderRadius.medium}; }
+  > *:nth-of-type(${bottomLeft}) { border-bottom-left-radius: ${theme.borderRadius.medium}; }
+  > *:nth-of-type(${bottomRight}) { border-bottom-right-radius: ${theme.borderRadius.medium}; }
 `;
 
 export const PokeGridContainer = styled.div`
@@ -42,16 +42,15 @@ export const PokeGridContent = styled.div`
   gap: ${theme.spacing.nano};
   margin-bottom: ${theme.spacing.medium};
 
-  ${borderRadiusGrid(7, 9, 17, 19)}
+  ${borderRadiusGrid(3, 5, 11, 13)}
 
   @media (max-width: ${theme.breakpoints.md}) {
     grid-template-columns: repeat(4, ${theme.spacing[100]});
     grid-template-rows: repeat(4, ${theme.spacing[100]});
 
-    ${borderRadiusGrid(6, 8, 14, 16)}
-    > *:nth-child(7) { border-top-left-radius: ${theme.borderRadius.none}; }
-    > *:nth-child(9) { border-top-right-radius: ${theme.borderRadius.none}; }
-    > *:nth-child(19) { border-bottom-right-radius: ${theme.borderRadius.none}; }
+    ${borderRadiusGrid(2, 4, 8, 10)}
+    > *:nth-of-type(3) { border-top-left-radius: ${theme.borderRadius.none}; }
+    > *:nth-of-type(5) { border-top-right-radius: ${theme.borderRadius.none}; }
   }
 
   @media (max-width: ${theme.breakpoints.sm}) {
