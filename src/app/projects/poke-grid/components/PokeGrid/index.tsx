@@ -55,8 +55,7 @@ const PokeGrid = () => {
   const validateGuess = (pair: TypePair, pokemon: Pokemon): boolean => {
     const guessTypes = pokemon.types.map((slot) => slot.type.name);
     const validate = pair.every(type => guessTypes.includes(type))
-    // return validate;
-    return true;
+    return validate;
   }
 
   const handleGuess = async (row: number, column: number, pokemon: PokemonListItem) => {
