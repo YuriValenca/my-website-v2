@@ -7,6 +7,7 @@ import { PokemonTypeName, typeExporter, typeImages } from "../../helpers/typeExp
 import { CellState, PokeGridBoard, PokemonType, TypePair } from "../../types/board";
 import { Pokemon, PokemonListItem } from "../../types/pokemon";
 import { getPokemon } from "../../api/pokemon";
+import PokeGridHeader from "../Header";
 import Instructions from "../Instructions";
 import TypePill from "../TypePill";
 import SelectionCell from "../SelectionCell";
@@ -98,6 +99,7 @@ const PokeGrid = () => {
 
   return (
     <PokeGridContainer>
+      <PokeGridHeader />
       <Title>Today's puzzle:</Title>
       <PokeGridContent>
         {Array.from({ length: 4 }, (_, row) =>
