@@ -16,7 +16,7 @@ Description
 
 ## Contributing
 
-Before opening a pull request, please read the [Commit Style Guide](.github/COMMIT_STYLE_GUIDE.md) to keep the commit history consistent.
+Before opening a pull request, please read the [Commit Style Guide](.github/commit_style_guide.md) to keep the commit history consistent.
 
 ## Author
 
