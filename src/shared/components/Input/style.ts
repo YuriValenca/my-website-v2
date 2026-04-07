@@ -46,7 +46,7 @@ export const InputField = styled.input`
 
 export const ErrorMessage = styled.p`
   text-align: center;
-  font-size: ${theme.fontSize.sm};
+  font-size: ${theme.fontSize.xsm};
   color: ${theme.colors.text.error};
   margin: ${theme.spacing.none};
   padding-left: ${theme.spacing.nano};

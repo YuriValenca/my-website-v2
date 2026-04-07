@@ -1,10 +1,16 @@
-import { Press_Start_2P, Noto_Sans } from "next/font/google";
+import { Press_Start_2P, Noto_Sans, Playfair_Display } from "next/font/google";
 
 const pressStartFont = Press_Start_2P({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
 });
+
+const playfairFont = Playfair_Display({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const notoSansFont = Noto_Sans({
   weight: ['400', '500', '700'],
@@ -44,10 +50,16 @@ export const theme = {
     },
     neutral: {
       white: "#ffffff",
+      gray50: "#f5f5f5",
       gray100: "#ebebeb",
       gray200: "#d4d4d4",
+      gray300: "#b8b8b8",
       gray400: "#787878",
+      gray500: "#616161",
       gray600: "#515151",
+      gray700: "#3d3d3d",
+      gray800: "#2a2a2a",
+      gray900: "#1a1a1a",
       black: "#000000",
     },
   },
@@ -76,11 +88,13 @@ export const theme = {
   },
   fontFamily: {
     ps2p: pressStartFont.style.fontFamily,
+    playfair: playfairFont.style.fontFamily,
     noto: notoSansFont.style.fontFamily,
   },
   fontSize: {
     tooltip: "10px",
-    sm: "12px",
+    xsm: "12px",
+    sm: "13px",
     md: "14px",
     normal: "16px",
     h5: "20px",
