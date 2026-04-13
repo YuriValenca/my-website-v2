@@ -22,12 +22,13 @@ export const OptionsContainer = styled.div`
   gap: ${theme.spacing.medium};
 `;
 
-export const Title = styled.h3`
+export const Title = styled.h2`
   font-family: ${theme.fontFamily.playfair};
-  font-size: ${theme.fontSize.h3};
+  font-size: ${theme.fontSize.h2};
   color: ${theme.colors.text.primary};
-  margin: ${theme.spacing.none} ${theme.spacing.none} ${theme.spacing.xsmall};
+  margin: ${theme.spacing.none} ${theme.spacing.medium} ${theme.spacing.micro} ${theme.spacing.none};
   letter-spacing: 1px;
+  cursor: pointer;
 `;
 
 export const SearchContainer = styled.div`
