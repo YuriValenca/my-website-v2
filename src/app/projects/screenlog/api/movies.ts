@@ -16,7 +16,7 @@ async function getLatest(): Promise<MovieList> {
 }
 
 async function getTopRated(): Promise<MovieList> {
-  const res = await fetch(`${BASE_URL}/movies/top_rated`, { headers })
+  const res = await fetch(`${BASE_URL}/movie/top_rated`, { headers })
 
   if (!res.ok) throw new Error (`Failed to fetch top rated movies: ${res.status}`)
 
@@ -24,7 +24,7 @@ async function getTopRated(): Promise<MovieList> {
 }
 
 async function getPopular(): Promise<MovieList> {
-  const res = await fetch(`${BASE_URL}/movies/popular`, { headers })
+  const res = await fetch(`${BASE_URL}/movie/popular`, { headers })
 
   if (!res.ok) throw new Error (`Failed to fetch popular movies: ${res.status}`)  
 
