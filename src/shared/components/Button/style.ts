@@ -10,7 +10,7 @@ export const StyledButton = styled.button`
   border-radius: ${theme.borderRadius.small};
   cursor: pointer;
   font-size: ${theme.fontSize.normal};
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 
   &:hover {
     opacity: 0.7;

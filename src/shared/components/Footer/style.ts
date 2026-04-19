@@ -15,6 +15,10 @@ export const FooterWrapper = styled.footer`
   justify-content: center;
   gap: ${theme.spacing.large};
   padding: 0 ${theme.spacing.medium};
+
+  @media (max-width: ${theme.breakpoints.sm}) {
+    gap: ${theme.spacing.small};
+  }
 `;
 
 export const SocialLink = styled.a`
