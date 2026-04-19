@@ -6,7 +6,8 @@ export const HeaderWrapper = styled.header`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: ${theme.spacing.none};
+  padding: ${theme.spacing.none} 10%;
+  background-color: ${theme.colors.background.surface};
 
   svg {
     width: ${theme.spacing.medium};
