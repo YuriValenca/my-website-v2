@@ -6,7 +6,7 @@ export const SearchBarWrapper = styled.div<{ visible: boolean }>`
   display: flex;
   flex-direction: column;
   width: 280px;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
   transform: ${({ visible }) => (visible ? "translateX(0)" : "translateX(20px)")};
   transition: opacity 0.25s ease, transform 0.25s ease;
   pointer-events: ${({ visible }) => (visible ? "auto" : "none")};

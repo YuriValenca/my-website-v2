@@ -7,4 +7,8 @@ export const ScreenlogWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing.medium};
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.medium} 6% ${theme.spacing.none};
+  }
 `;

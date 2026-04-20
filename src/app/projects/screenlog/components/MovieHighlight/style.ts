@@ -11,6 +11,12 @@ const getRatingColor = (vote: number | undefined): string => {
 
 export const MovieHighlightWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.large};
+`;
+
+export const TopRow = styled.div`
+  display: flex;
   flex-direction: row;
   gap: ${theme.spacing.large};
 
@@ -25,6 +31,11 @@ export const MovieHighlightWrapper = styled.div`
     :hover {
       transform: scale(1.05);
     }
+
+    @media (max-width: ${theme.breakpoints.tablet}) {
+      width: 150px;
+      height: 225px;
+    }
   }
 `;
 
@@ -38,6 +49,7 @@ export const DetailsWrapper = styled.div`
 
 export const Tags = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 `;
 
@@ -77,7 +89,8 @@ export const Rating = styled.span<{ voteValue: number | undefined }>`
 `;
 
 export const Overview = styled.p`
-
+  color: ${theme.colors.text.secondary};
+  font-size: ${theme.fontSize.md};
 `;
 
 export const Cast = styled.div``;

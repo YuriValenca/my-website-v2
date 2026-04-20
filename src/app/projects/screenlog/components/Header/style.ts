@@ -8,12 +8,26 @@ export const HeaderWrapper = styled.header`
   justify-content: space-between;
   padding: ${theme.spacing.none} 10%;
   background-color: ${theme.colors.background.surface};
+  height: ${theme.spacing.huge};
 
   svg {
     width: ${theme.spacing.medium};
     height: ${theme.spacing.medium};
     flex-shrink: 0;
     cursor: pointer;
+  }
+
+  @media (max-width: ${theme.breakpoints.lg}) {
+    height: ${theme.spacing.xxxlarge};
+  }
+
+  @media (max-width: ${theme.breakpoints.md}) {
+    padding: ${theme.spacing.none} 6%;
+  }
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    padding: ${theme.spacing.none} 6%;
+    height: ${theme.spacing.xxxlarge};
   }
 `;
 
@@ -30,6 +44,10 @@ export const Title = styled.h2`
   margin: ${theme.spacing.none} ${theme.spacing.medium} ${theme.spacing.micro} ${theme.spacing.none};
   letter-spacing: 1px;
   cursor: pointer;
+
+  @media (max-width: ${theme.breakpoints.lg}) {
+    display: none;
+  }
 `;
 
 export const SearchContainer = styled.div`
