@@ -21,6 +21,6 @@ export function useSearchMulti(query: string) {
 
 export const groupResultsByType = (results: SearchResultItem[]) => ({
   movie: results.filter((r) => r.media_type === "movie"),
-  // tv: results.filter((r) => r.media_type === "tv"),
+  tv: results.filter((r) => r.media_type === "tv"),
   person: results.filter((r) => r.media_type === "person"),
 });
