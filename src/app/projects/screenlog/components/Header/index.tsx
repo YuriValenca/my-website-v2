@@ -46,21 +46,24 @@ const ScreenlogHeader = () => {
               { text: 'Now playing', to: '/now-playing' },
               { text: 'Top rated', to: '/top-rated' },
             ]}
+            link="movies/"
           />
           <HeaderOption
             category="People"
             options={[
               { text: 'Popular', to: '/people/popular' },
             ]}
+            link="people/"
           />
-          {/* <HeaderOption
+          <HeaderOption
             category="TV Shows"
             options={[
               { text: 'Popular', to: '/popular' },
               { text: 'Now playing', to: '/now-playing' },
               { text: 'Top rated', to: '/top-rated' },
             ]}
-          /> */}
+            link="tv-shows/"
+          />
         </OptionsContainer>
         <SearchContainer ref={searchContainerRef}>
           {!isMobile && (

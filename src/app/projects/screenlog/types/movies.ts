@@ -1,16 +1,16 @@
-export interface MovieBase {
-  id: number,
-  title: string,
-  overview: string,
+export interface MediaBase {
+  id: number;
+  overview: string;
   poster_path: string | null;
   backdrop_path: string | null;
-  release_date: string;
   vote_average: number;
   vote_count: number;
 }
 
-export interface Movie extends MovieBase {
-  genre_ids: number[]
+export interface Movie extends MediaBase {
+  title: string;
+  release_date: string;
+  genre_ids: number[];
 }
 
 export interface Genre {
@@ -35,7 +35,9 @@ export interface CrewMember {
   profile_path: string | null;
 }
 
-export interface MovieDetails extends MovieBase {
+export interface MovieDetails extends MediaBase {
+  title: string;
+  release_date: string;
   tagline: string;
   runtime: number | null;
   genres: Genre[];
