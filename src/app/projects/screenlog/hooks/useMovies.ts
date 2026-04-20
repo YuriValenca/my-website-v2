@@ -1,7 +1,7 @@
 "use client";
 
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { getGenres, getLatest, getMovie, getPopular, getTopRated, searchMovies } from "../api/movies";
+import { getGenres, getLatest, getMovie, getPopular, getTopRated } from "../api/movies";
 
 export function useGetGenres() {
   return useQuery({
@@ -28,14 +28,6 @@ export function useGetPopular(page = 1) {
   return useQuery({
     queryKey: ["movies", "popular", page],
     queryFn: () => getPopular(page),
-  })
-}
-
-export function useSearchMovies(query: string) {
-  return useQuery({
-    queryKey: ["movies", "search", query],
-    queryFn: () => searchMovies(query),
-    enabled: query.length > 2,
   })
 }
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "@/shared/components/Input";
-import { useSearchMulti } from "../../../hooks/useSearchResults";
+import { useSearchMulti } from "../../../hooks/useSearch";
 import { SearchResultItem } from "../../../types/searchResults";
 import PersonIcon from "../../../../../../shared/assets/icons/personIcon.svg";
 import MovieIcon from "../../../../../../shared/assets/icons/movieIcon.svg";
@@ -43,6 +43,7 @@ const SearchBar = ({ visible, onClose }: SearchBarProps) => {
 
   const isOpen = query.length > MIN_QUERY_LENGTH;
   const results = filterAndRankResults(data?.results ?? []);
+  console.log(results)
 
   const handleItemClick = (item: SearchResultItem) => {
     setQuery("");

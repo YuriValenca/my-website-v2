@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "@/shared/components/Input";
-import { useSearchMulti } from "../../../hooks/useSearchResults";
+import { useSearchMulti } from "../../../hooks/useSearch";
 import { SearchResultItem } from "../../../types/searchResults";
 import PersonIcon from "../../../../../../shared/assets/icons/personIcon.svg";
 import MovieIcon from "../../../../../../shared/assets/icons/movieIcon.svg";
