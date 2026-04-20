@@ -39,17 +39,6 @@ async function getPopular(page?: number): Promise<MovieList> {
   return res.json() as Promise<MovieList>;
 }
 
-async function searchMovies(query: string): Promise<MovieList> {
-  const res = await fetch (
-    `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&page=1`,
-    { headers }
-  )
-
-  if (!res.ok) throw new Error(`Failed to fetch movie: ${res.status}`);
-
-  return res.json() as Promise<MovieList>
-}
-
 async function getMovie(id: number): Promise<MovieDetails> {
   const res = await fetch (
     `${BASE_URL}/movie/${id}?append_to_response=credits`,
@@ -66,6 +55,5 @@ export {
   getLatest,
   getTopRated,
   getPopular,
-  searchMovies,
   getMovie,
 }
