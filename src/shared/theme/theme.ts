@@ -26,6 +26,7 @@ export const theme = {
       surface: "#1a2444",
       surfaceHover: "#243058",
       overlay: "rgba(0, 0, 0, 0.6)",
+      heavyOverlay: "rgba(0, 0, 0, 0.9)"
     },
     border: {
       default: "#2e3f6e",
@@ -43,10 +44,15 @@ export const theme = {
     feedback: {
       correct: "#4caf7d",
       wrong: "#e05c5c",
+      goodRating: "#00e676",
+      avgRating: "#f6c90e",
+      badRating: "#8892b0",
+      horribleRating: "#ff5252",
     },
     accent: {
       yellow: "#f6c90e",
       red: "#CC2C21",
+      blue: "#01B4E4",
     },
     neutral: {
       white: "#ffffff",
@@ -61,6 +67,13 @@ export const theme = {
       gray800: "#2a2a2a",
       gray900: "#1a1a1a",
       black: "#000000",
+    },
+    screenlog: {
+      posterBackground: "#1a2444",
+      posterBorder: "#2e3f6e",
+      badgeText: "#5a6a8a",
+      ratingBg: "rgba(16, 24, 51, 0.85)",
+      genreText: "#8892b0",
     },
   },
   spacing: {
@@ -106,6 +119,7 @@ export const theme = {
   breakpoints: {
     xs: "360px",
     sm: "480px",
+    tablet: "600px",
     md: "768px",
     lg: "1024px",
     xl: "1280px",
