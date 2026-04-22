@@ -26,7 +26,6 @@ export const HeaderWrapper = styled.header`
   }
 
   @media (max-width: ${theme.breakpoints.tablet}) {
-    padding: ${theme.spacing.none} 6%;
     height: ${theme.spacing.xxxlarge};
   }
 `;
