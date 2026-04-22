@@ -7,9 +7,9 @@ const headers = {
   "Content-type": "application/json",
 }
 
-async function searchPeople(query: string): Promise<PersonList> {
+async function searchPeople(query: string, page = 1): Promise<PersonList> {
   const res = await fetch(
-    `${BASE_URL}/search/person?query=${encodeURIComponent(query)}&page=1`,
+    `${BASE_URL}/search/person?query=${encodeURIComponent(query)}&page=${page}`,
     { headers }
   );
 
