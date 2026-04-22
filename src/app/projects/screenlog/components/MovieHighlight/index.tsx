@@ -39,7 +39,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
 
     const result = await getPopular(randomPage);
     const movie = result.results[randomIndexOnPage];
-    router.push(`projects/screenlog/movie/id=${movie?.id}`)
+    router.push(`screenlog/movie/id=${movie?.id}`)
   }
 
   const overviewAndButtons = (
@@ -48,7 +48,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
       <ButtonsWrapper>
         <Button
           bg={theme.colors.neutral.gray100}
-          onClick={() => router.push(`projects/screenlog/movie/id=${data?.id}`)}
+          onClick={() => router.push(`screenlog/movie/id=${data?.id}`)}
           text="See details"
           textColor={theme.colors.text.dark}
         />
@@ -73,7 +73,12 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
         <DetailsWrapper>
           <Tags>
             {displayGenres.map(genre => (
-              <Tag key={genre.id}>{genre.name}</Tag>
+              <Tag
+                key={genre.id}
+                onClick={() => router.push(`genre/${genre.name.toLowerCase()}`)}
+              >
+                {genre.name}
+              </Tag>
             ))}
           </Tags>
           <Title>{data?.title}</Title>
@@ -84,7 +89,6 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
             </Rating>
             /10
           </RatingWrapper>
-          <Cast />
           {!isMobile && overviewAndButtons}
         </DetailsWrapper>
       </TopRow>
