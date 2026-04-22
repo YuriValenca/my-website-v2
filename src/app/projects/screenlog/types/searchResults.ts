@@ -26,6 +26,8 @@ export interface SearchResultTV {
 
 export type SearchResultItem = SearchResultMovie | SearchResultPerson | SearchResultTV;
 
+export type MediaType = SearchResultItem["media_type"];
+
 export interface MultiSearchList {
   page: number;
   results: SearchResultItem[];
