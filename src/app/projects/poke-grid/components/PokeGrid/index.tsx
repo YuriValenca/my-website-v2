@@ -14,6 +14,7 @@ import SelectionCell from "../SelectionCell";
 import EndGameContent from "../EndGame";
 import Modal from "@/shared/components/Modal";
 import Button from "@/shared/components/Button";
+import Spinner from "@/shared/components/Spinner";
 import { PokeGridContainer, PokeGridContent, ScoreWrapper, Title } from "./style"
 import { theme } from "@/shared/theme/theme";
 
@@ -93,7 +94,7 @@ const PokeGrid = () => {
     </ScoreWrapper>
   )
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Spinner />;
   if (isError) return <p>Something went wrong</p>;
   if (!data) return <p>Something went wrong fetching Pokémon, refresh the page to try again.</p>
 

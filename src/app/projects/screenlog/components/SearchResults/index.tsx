@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CategoriesWrapper, Category, CategoryAmount, ResultsTitle, SearchResultsWrapper } from "./style";
 import { useSearchByCategory } from "../../hooks/useSearch";
+import Spinner from "@/shared/components/Spinner";
 import ResultCard from "./ResultCard";
 
 interface SearchResultsProps {
@@ -29,7 +30,8 @@ const SearchResults = ({ query }: SearchResultsProps) => {
 
   const categoryData = { movie: movies, tv: tv, person: people };
   const active = categoryData[activeTab];
-  console.log(categoryData["movie"].data);
+  
+  if (active.isFetching) return <Spinner />
 
   return (
     <SearchResultsWrapper>
@@ -48,7 +50,6 @@ const SearchResults = ({ query }: SearchResultsProps) => {
       </CategoriesWrapper>
 
       <div>
-        {active.isFetching && <div>Loading...</div>}
         {!active.isFetching && active.data?.results.map((item) => (
           <div key={item.id}>
             <ResultCard
