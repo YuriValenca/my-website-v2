@@ -31,21 +31,20 @@ export const PosterWrapper = styled.div<{ variant: MediaType }>`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  align-self: flex-start;
   background-color: ${theme.colors.neutral.gray200};
   border-radius: ${theme.borderRadius.small};
   overflow: hidden;
   width: ${({ variant }) => variant === "person" ? theme.spacing.enormous : theme.spacing[100]};
-  min-height: ${({ variant }) => variant === "person" ? theme.spacing.enormous : "150px"};
 
   svg {
-    width: 60%;
-    height: 60%;
+    width: ${theme.spacing.enormous};
+    height: ${theme.spacing.enormous};
     fill: ${theme.colors.neutral.gray400};
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
-    width: ${({ variant }) => variant === "person" ? theme.spacing.xxxlarge : "72px"};
-    min-height: ${({ variant }) => variant === "person" ? "72px" : "108px"};
+    width: ${({ variant }) => variant === "person" ? theme.spacing.huge : "72px"};
   }
 `;
 
