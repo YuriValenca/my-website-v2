@@ -5,6 +5,7 @@ import { CategoriesWrapper, Category, CategoryAmount, ResultsTitle, ResultsWrapp
 import { useSearchByCategory } from "../../hooks/useSearch";
 import Spinner from "@/shared/components/Spinner";
 import ResultCard from "./ResultCard";
+import Pagination from "@/shared/components/Pagination";
 
 interface SearchResultsProps {
   query: string;
@@ -30,6 +31,10 @@ const SearchResults = ({ query }: SearchResultsProps) => {
 
   const categoryData = { movie: movies, tv: tv, person: people };
   const active = categoryData[activeTab];
+
+  const handlePageChange = (newPage: number) => {
+    setPage(prev => ({ ...prev, [activeTab]: newPage }));
+  }
   
   if (active.isFetching) return <Spinner />
 
@@ -57,8 +62,14 @@ const SearchResults = ({ query }: SearchResultsProps) => {
             mediaType={activeTab}
           />
         ))}
+        {active.data && (
+          <Pagination
+            currentPage={page[activeTab]}
+            totalResults={active.data?.total_results}
+            onPageChange={handlePageChange}
+          />
+        )}
       </ResultsWrapper>
-      {/* Pagination component */}
     </SearchResultsWrapper>
   );
 };
