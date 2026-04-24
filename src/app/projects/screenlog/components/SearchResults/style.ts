@@ -5,17 +5,19 @@ export const SearchResultsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: ${theme.spacing.medium};
-  padding: ${theme.spacing.none} 10%;
+  padding: ${theme.spacing.none} 10% ${theme.spacing[100]};
   gap: ${theme.spacing.xxlarge};
 
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.none} 6%;
+    padding: ${theme.spacing.none} 6% ${theme.spacing[100]};
+    flex-direction: column;
   }
 `;
 
 export const CategoriesWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   height: fit-content;
   border: 1px solid ${theme.colors.border.default};
   border-radius: ${theme.borderRadius.none} ${theme.borderRadius.none} ${theme.borderRadius.medium} ${theme.borderRadius.medium};
@@ -31,7 +33,7 @@ export const ResultsTitle = styled.p`
 export const Category = styled.div<{ active: boolean }>`
   display: flex;
   justify-content: space-between;
-  gap: ${theme.spacing.large};
+  gap: ${theme.spacing.xxxlarge};
   padding: ${theme.spacing.small} ${theme.spacing.default};
   font-weight: ${({ active }) => active ? "600" : "400"};
   color: ${({ active }) => active ? theme.colors.neutral.white : theme.colors.text.secondary};
@@ -54,4 +56,11 @@ export const CategoryAmount = styled.span`
   color: ${theme.colors.neutral.gray800};
   border-radius: ${theme.borderRadius.medium};
   padding: ${theme.spacing.micro};
+`;
+
+export const ResultsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: ${theme.spacing.medium};
 `;

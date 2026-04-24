@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CategoriesWrapper, Category, CategoryAmount, ResultsTitle, SearchResultsWrapper } from "./style";
+import { CategoriesWrapper, Category, CategoryAmount, ResultsTitle, ResultsWrapper, SearchResultsWrapper } from "./style";
 import { useSearchByCategory } from "../../hooks/useSearch";
 import Spinner from "@/shared/components/Spinner";
 import ResultCard from "./ResultCard";
@@ -49,17 +49,15 @@ const SearchResults = ({ query }: SearchResultsProps) => {
         ))}
       </CategoriesWrapper>
 
-      <div>
+      <ResultsWrapper>
         {!active.isFetching && active.data?.results.map((item) => (
-          <div key={item.id}>
-            <ResultCard
-              key={item.id}
-              item={item}
-              mediaType={activeTab}
-            />
-          </div>
+          <ResultCard
+            key={item.id}
+            item={item}
+            mediaType={activeTab}
+          />
         ))}
-      </div>
+      </ResultsWrapper>
       {/* Pagination component */}
     </SearchResultsWrapper>
   );
