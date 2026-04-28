@@ -68,6 +68,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
       <TopRow>
         <img
           src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
+          onClick={() => router.push(`screenlog/movie/id=${data?.id}`)}
           alt={data?.title}
         />
         <DetailsWrapper>

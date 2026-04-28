@@ -18,6 +18,7 @@ export const MovieHighlightWrapper = styled.div`
 export const TopRow = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: ${theme.spacing.large};
 
   img {

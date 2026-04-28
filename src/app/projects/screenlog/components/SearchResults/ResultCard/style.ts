@@ -36,6 +36,7 @@ export const PosterWrapper = styled.div<{ variant: MediaType }>`
   border-radius: ${theme.borderRadius.small};
   overflow: hidden;
   width: ${({ variant }) => variant === "person" ? theme.spacing.enormous : theme.spacing[100]};
+  height: ${({ variant }) => variant === "person" ? "unset" : "150px"};
 
   svg {
     width: ${theme.spacing.enormous};
@@ -45,6 +46,7 @@ export const PosterWrapper = styled.div<{ variant: MediaType }>`
 
   @media (max-width: ${theme.breakpoints.md}) {
     width: ${({ variant }) => variant === "person" ? theme.spacing.huge : "72px"};
+    height: ${({ variant }) => variant === "person" ? "unset" : "108px"};
   }
 `;
 
