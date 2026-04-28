@@ -88,7 +88,7 @@ const ResultCard = ({ item, mediaType }: ResultCardProps) => {
           <PersonDetails>
             {department}
             &nbsp;•&nbsp;
-            {knownFor && knownFor.map((movie) => movie.title).join(', ')}
+            {knownFor?.map((movie) => movie.title || movie.original_name).join(', ') || ''}
           </PersonDetails>
         }
       </ResultDetailsWrapper>
