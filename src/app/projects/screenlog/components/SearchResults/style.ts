@@ -31,6 +31,7 @@ export const ResultsTitle = styled.p`
 `;
 
 export const Category = styled.div<{ active: boolean }>`
+  min-width: 190px;
   display: flex;
   justify-content: space-between;
   gap: ${theme.spacing.xxxlarge};

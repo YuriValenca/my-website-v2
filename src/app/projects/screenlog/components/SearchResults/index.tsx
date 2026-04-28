@@ -35,7 +35,7 @@ const SearchResults = ({ query }: SearchResultsProps) => {
   const handlePageChange = (newPage: number) => {
     setPage(prev => ({ ...prev, [activeTab]: newPage }));
   }
-  
+
   if (active.isFetching) return <Spinner />
 
   return (
@@ -54,22 +54,27 @@ const SearchResults = ({ query }: SearchResultsProps) => {
         ))}
       </CategoriesWrapper>
 
-      <ResultsWrapper>
-        {!active.isFetching && active.data?.results.map((item) => (
-          <ResultCard
-            key={item.id}
-            item={item}
-            mediaType={activeTab}
-          />
-        ))}
-        {active.data && (
-          <Pagination
-            currentPage={page[activeTab]}
-            totalResults={active.data?.total_results}
-            onPageChange={handlePageChange}
-          />
-        )}
-      </ResultsWrapper>
+      {CATEGORIES.map(({ key }) => {
+        const tab = categoryData[key];
+        return (
+          <ResultsWrapper key={key} style={{ display: activeTab === key ? "flex" : "none" }}>
+            {tab.data?.results.map((item) => (
+              <ResultCard
+                key={item.id}
+                item={item}
+                mediaType={key}
+              />
+            ))}
+            {tab.data && (
+              <Pagination
+                currentPage={page[key]}
+                totalResults={tab.data.total_results}
+                onPageChange={handlePageChange}
+              />
+            )}
+          </ResultsWrapper>
+        );
+      })}
     </SearchResultsWrapper>
   );
 };

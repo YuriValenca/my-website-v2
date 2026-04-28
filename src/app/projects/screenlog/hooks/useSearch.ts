@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { searchMovies, searchMulti, searchTvShows } from "../api/search";
 import { MediaType, SearchResultItem } from "../types/searchResults";
 import { searchPeople } from "../api/people";
@@ -33,18 +33,21 @@ export function useSearchByCategory(query: string, page: Record<MediaType, numbe
     queryKey: ["search", "movie", query, page.movie],
     queryFn: () => searchMovies(query, page.movie),
     enabled,
+    placeholderData: keepPreviousData,
   });
 
   const tv = useQuery({
     queryKey: ["search", "tv", query, page.tv],
     queryFn: () => searchTvShows(query, page.tv),
     enabled,
+    placeholderData: keepPreviousData,
   });
 
   const people = useQuery({
     queryKey: ["search", "person", query, page.person],
     queryFn: () => searchPeople(query, page.person),
     enabled,
+    placeholderData: keepPreviousData,
   });
 
   return {
