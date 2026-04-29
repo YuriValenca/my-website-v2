@@ -1,4 +1,4 @@
-import { PersonList } from "../types/people";
+import { PersonList } from "../(types)/people";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 

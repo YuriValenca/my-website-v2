@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useGenres } from "../../context/context";
-import { Movie } from "../../types/movies";
+import { useGenres } from "../../(context)/context";
+import { Movie } from "../../(types)/movies";
 import Button from "@/shared/components/Button";
 import RandomizeIcon from "../../../../../shared/assets/icons/randomizeIcon.svg";
-import { ButtonsWrapper, Cast, DetailsWrapper, ExtraInfo, MovieHighlightWrapper, Overview, RatingWrapper, Rating, Tag, Tags, Title, TopRow } from "./style";
+import { ButtonsWrapper, DetailsWrapper, ExtraInfo, MovieHighlightWrapper, Overview, RatingWrapper, Rating, Tag, Tags, Title, TopRow } from "./style";
 import { theme } from "@/shared/theme/theme";
-import { getPopular } from "../../api/movies";
+import { getPopular } from "../../(api)/movies";
 import { formatDate } from "@/shared/utils/stringUtils";
 
 interface MovieHighlightProps {
@@ -39,7 +39,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
 
     const result = await getPopular(randomPage);
     const movie = result.results[randomIndexOnPage];
-    router.push(`screenlog/movie/id=${movie?.id}`)
+    router.push(`screenlog/movie/${movie?.id}`)
   }
 
   const overviewAndButtons = (
@@ -48,7 +48,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
       <ButtonsWrapper>
         <Button
           bg={theme.colors.neutral.gray100}
-          onClick={() => router.push(`screenlog/movie/id=${data?.id}`)}
+          onClick={() => router.push(`screenlog/movie/${data?.id}`)}
           text="See details"
           textColor={theme.colors.text.dark}
         />
@@ -68,7 +68,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
       <TopRow>
         <img
           src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
-          onClick={() => router.push(`screenlog/movie/id=${data?.id}`)}
+          onClick={() => router.push(`screenlog/movie/${data?.id}`)}
           alt={data?.title}
         />
         <DetailsWrapper>

@@ -1,7 +1,7 @@
-import { MovieList } from "../types/movies";
-import { PersonList } from "../types/people";
-import { TvShowList } from "../types/tv-shows";
-import { MultiSearchList } from "../types/searchResults";
+import { MovieList } from "../(types)/movies";
+import { PersonList } from "../(types)/people";
+import { TvShowList } from "../(types)/tv-shows";
+import { MultiSearchList } from "../(types)/searchResults";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const headers = {

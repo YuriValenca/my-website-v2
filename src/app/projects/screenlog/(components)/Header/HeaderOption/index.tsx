@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Option } from "../../../types/screenlog"
+import { Option } from "../../../(types)/screenlog"
 import { HeaderOptionWrapper, OptionItem, OptionsList } from "./style"
 
 interface HeaderOptionsProps {

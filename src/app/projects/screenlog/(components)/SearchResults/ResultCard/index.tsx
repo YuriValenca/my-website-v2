@@ -1,8 +1,8 @@
 import { formatDate } from "@/shared/utils/stringUtils";
-import { Movie } from "../../../types/movies";
-import { Person } from "../../../types/people";
-import { MediaType } from "../../../types/searchResults";
-import { TvShow } from "../../../types/tv-shows";
+import { Movie } from "../../../(types)/movies";
+import { Person } from "../../../(types)/people";
+import { MediaType } from "../../../(types)/searchResults";
+import { TvShow } from "../../../(types)/tv-shows";
 import { MediaDetailContent, MediaDetails, PersonDetails, Poster, PosterWrapper, ResultCardWrapper, ResultDetailsWrapper, ResultTitle } from "./style";
 import MediaPlaceholder from "../../../../../../shared/assets/icons/emptyMediaIcon.svg";
 import PersonPlaceholder from "../../../../../../shared/assets/icons/emptyPeopleIcon.svg";

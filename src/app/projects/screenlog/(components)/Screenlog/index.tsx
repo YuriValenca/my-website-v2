@@ -2,11 +2,11 @@
 
 import MovieSection from "../MovieSection";
 import { ScreenlogWrapper } from "./style";
-import { useGetGenres, useGetLandingPageData } from "../../hooks/useMovies";
+import { useGetGenres, useGetLandingPageData } from "../../(hooks)/useMovies";
 import Spinner from "@/shared/components/Spinner";
 import { randomRange } from "@/shared/utils/mathUtils";
 import MovieHighlight from "../MovieHighlight";
-import GenreContext from "../../context/context";
+import GenreContext from "../../(context)/context";
 
 const Screenlog = () => {
   const { latest, popular, topRated, isLoading, isError } = useGetLandingPageData({ enabled: true });

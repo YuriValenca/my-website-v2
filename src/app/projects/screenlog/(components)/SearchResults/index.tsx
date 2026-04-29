@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { CategoriesWrapper, Category, CategoryAmount, ResultsTitle, ResultsWrapper, SearchResultsWrapper } from "./style";
-import { useSearchByCategory } from "../../hooks/useSearch";
+import { useSearchByCategory } from "../../(hooks)/useSearch";
 import Spinner from "@/shared/components/Spinner";
 import ResultCard from "./ResultCard";
 import Pagination from "@/shared/components/Pagination";

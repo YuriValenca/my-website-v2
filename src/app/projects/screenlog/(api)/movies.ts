@@ -1,4 +1,4 @@
-import { Genre, MovieDetails, MovieList } from "../types/movies";
+import { Genre, MovieDetails, MovieList } from "../(types)/movies";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 

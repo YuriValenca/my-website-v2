@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { searchPeople } from "../api/people";
+import { searchPeople } from "../(api)/people";
 
 export function useSearchPeople(query: string) {
   return useQuery({

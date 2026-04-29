@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { theme } from "@/shared/theme/theme";
-import { MediaType } from "../../../types/searchResults";
+import { MediaType } from "../../../(types)/searchResults";
 
 export const ResultCardWrapper = styled.div`
   display: flex;
