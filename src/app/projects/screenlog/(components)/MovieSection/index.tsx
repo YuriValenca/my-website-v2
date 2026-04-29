@@ -1,4 +1,4 @@
-import { MovieList } from "../../types/movies";
+import { MovieList } from "../../(types)/movies";
 
 
 interface MovieSectionProps {

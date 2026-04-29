@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { Genre } from "../types/movies";
+import { Genre } from "../(types)/movies";
 
 const GenreContext = createContext<Genre[]>([]);
 

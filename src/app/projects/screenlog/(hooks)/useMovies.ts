@@ -1,7 +1,7 @@
 "use client";
 
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { getGenres, getLatest, getMovie, getPopular, getTopRated } from "../api/movies";
+import { getGenres, getLatest, getMovie, getPopular, getTopRated } from "../(api)/movies";
 
 export function useGetGenres() {
   return useQuery({

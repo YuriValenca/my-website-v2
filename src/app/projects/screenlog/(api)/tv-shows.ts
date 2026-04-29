@@ -1,4 +1,4 @@
-import { TvShowDetails, TvShowList } from "../types/tv-shows";
+import { TvShowDetails, TvShowList } from "../(types)/tv-shows";
 
 
 const BASE_URL = "https://api.themoviedb.org/3";

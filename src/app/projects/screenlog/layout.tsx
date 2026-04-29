@@ -1,6 +1,6 @@
 "use client";
 
-import ScreenlogHeader from "./components/Header";
+import ScreenlogHeader from "./(components)/Header";
 import { ScreenlogLayout } from "./layout-style";
 
 interface ScreenlogLayoutProps {

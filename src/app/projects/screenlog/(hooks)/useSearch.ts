@@ -1,7 +1,7 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { searchMovies, searchMulti, searchTvShows } from "../api/search";
-import { MediaType, SearchResultItem } from "../types/searchResults";
-import { searchPeople } from "../api/people";
+import { searchMovies, searchMulti, searchTvShows } from "../(api)/search";
+import { MediaType, SearchResultItem } from "../(types)/searchResults";
+import { searchPeople } from "../(api)/people";
 
 
 export function useSearchMovies(query: string) {

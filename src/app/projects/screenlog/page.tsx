@@ -1,4 +1,4 @@
-import Screenlog from "./components/Screenlog";
+import Screenlog from "./(components)/Screenlog";
 
 const ScreenlogPage = () => {
   return <Screenlog />
