@@ -38,7 +38,7 @@ export function useGetMovie(id: number) {
   })
 }
 
-export function useGetLandingPageData(options?: { enabled?: boolean }) {
+export function useGetMoviePageData(options?: { enabled?: boolean }) {
   const results = useQueries({
     queries: [
       { queryKey: ["movies", "latest"], queryFn: getLatest, enabled: options?.enabled ?? true },

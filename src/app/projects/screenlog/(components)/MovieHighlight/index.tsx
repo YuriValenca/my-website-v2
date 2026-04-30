@@ -18,7 +18,7 @@ const TABLET_BREAKPOINT = parseInt(theme.breakpoints.tablet);
 
 const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
   const router = useRouter();
-  const genreList = useGenres();
+  const genreList = useGenres().movieGenres;
   const [isMobile, setIsMobile] = useState(window.innerWidth < TABLET_BREAKPOINT);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
             {displayGenres.map(genre => (
               <Tag
                 key={genre.id}
-                onClick={() => router.push(`genre/${genre.name.toLowerCase()}`)}
+                onClick={() => router.push(`screenlog/genre/${genre.name.toLowerCase()}`)}
               >
                 {genre.name}
               </Tag>
