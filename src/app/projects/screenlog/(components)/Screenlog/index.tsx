@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import MovieSection from "../MovieSection";
 import { ScreenlogWrapper } from "./style";
 import { useGetGenres, useGetMoviePageData } from "../../(hooks)/useMovies";
@@ -15,7 +16,10 @@ const Screenlog = () => {
   const { data: tvGenres = [] } = useGetTvGenres();
 
   // Get random movies. The min is fallback JIC the popular endpoint returns less than 20 movies.
-  const randomPopMovie = randomRange(0, Math.min(20, (popular?.total_results || 1)));
+  const randomPopMovie = useMemo(() => {
+    if (!popular?.total_results) return 0;
+    return randomRange(0, Math.min(20, popular.total_results));
+  }, [popular?.total_results]);
 
   if (isLoading) return <Spinner />;
   if (isError) return <div>Error</div>
