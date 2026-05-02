@@ -5,7 +5,13 @@ export interface MediaBase {
   backdrop_path: string | null;
   vote_average: number;
   vote_count: number;
-  original_name: string;
+  tagline: string;
+  status: string;
+  genres: Genre[];
+  credits: {
+    cast: CastMember[];
+    crew: CrewMember[];
+  };
 }
 
 export interface Movie extends MediaBase {
@@ -39,13 +45,9 @@ export interface CrewMember {
 export interface MovieDetails extends MediaBase {
   title: string;
   release_date: string;
-  tagline: string;
   runtime: number | null;
-  genres: Genre[];
-  credits: {
-    cast: CastMember[];
-    crew: CrewMember[];
-  }
+  budget: number | null;
+  revenue: number | null;
 }
 
 export interface MovieList {
