@@ -73,7 +73,11 @@ export const Tag = styled.button`
   }
 `;
 
-export const Title = styled.h3``;
+export const Title = styled.h5`
+  font-size: ${theme.fontSize.h5};
+  color: ${theme.colors.text.primary};
+  font-weight: 500;
+`;
 
 export const ExtraInfo = styled.div``;
 
