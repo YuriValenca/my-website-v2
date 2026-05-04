@@ -2,6 +2,8 @@ import { theme } from "@/shared/theme/theme";
 import styled from "@emotion/styled";
 
 export const HeaderWrapper = styled.header`
+  position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: row;
   align-items: center;
