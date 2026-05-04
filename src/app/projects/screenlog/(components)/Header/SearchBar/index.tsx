@@ -32,9 +32,11 @@ const MEDIA_TYPE_CONFIG = {
 
 const getItemLabel = (item: SearchResultItem) => "title" in item ? item.title : item.name;
 
-const getItemRoute = (item: SearchResultItem) => item.media_type === "person"
-    ? `/projects/screenlog/people/${item.id}`
-    : `/projects/screenlog/movie/${item.id}`;
+const getItemRoute = (item: SearchResultItem) => {
+  if (item.media_type === "person") return `/projects/screenlog/people/${item.id}`;
+  if (item.media_type === "tv") return `/projects/screenlog/tv-show/${item.id}`;
+  return `/projects/screenlog/movie/${item.id}`;
+};
 
 const filterAndRankResults = (results: SearchResultItem[]): SearchResultItem[] =>
   results
