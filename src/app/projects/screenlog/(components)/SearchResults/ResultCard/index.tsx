@@ -60,6 +60,13 @@ const ResultCard = ({ item, mediaType }: ResultCardProps) => {
     return `/`
   }
 
+  const knownForRender = () => {
+    return knownFor?.map((entry) => {
+      const isMovie = 'title' in entry;
+      return isMovie ? entry.title : entry.name;
+    }).join(', ') || ''
+  }
+
   return (
     <ResultCardWrapper
       onClick={() => router.push(handleRoute())}
@@ -88,7 +95,7 @@ const ResultCard = ({ item, mediaType }: ResultCardProps) => {
           <PersonDetails>
             {department}
             &nbsp;•&nbsp;
-            {knownFor?.map((movie) => movie.title || movie.original_name).join(', ') || ''}
+            {knownForRender()}
           </PersonDetails>
         }
       </ResultDetailsWrapper>
