@@ -19,7 +19,7 @@ const TABLET_BREAKPOINT = parseInt(theme.breakpoints.tablet);
 const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
   const router = useRouter();
   const genreList = useGenres().movieGenres;
-  const [isMobile, setIsMobile] = useState(window.innerWidth < TABLET_BREAKPOINT);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < TABLET_BREAKPOINT);

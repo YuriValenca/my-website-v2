@@ -5,7 +5,7 @@ export const MediaDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  > *:not(:first-child) {
+  > *:not(:first-of-type) {
     margin-bottom: ${theme.spacing.medium};
     padding: ${theme.spacing.none} 10%;
   }

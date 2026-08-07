@@ -14,7 +14,7 @@ const TABLET_BREAKPOINT = parseInt(theme.breakpoints.tablet);
 const ScreenlogHeader = () => {
   const router = useRouter();
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < TABLET_BREAKPOINT);
+  const [isMobile, setIsMobile] = useState(false);
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
