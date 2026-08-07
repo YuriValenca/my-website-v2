@@ -20,8 +20,8 @@ interface MediaDetailsProps {
 
 const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
   const router = useRouter();
-  const movieQuery = useGetMovie(id);
-  const tvQuery = useGetTvShow(id);
+  const movieQuery = useGetMovie(id, !isTVShow);
+  const tvQuery = useGetTvShow(id, isTVShow);
   const { data, isLoading } = isTVShow ? tvQuery : movieQuery;
 
   const mediaTitle = isTVShow ? (data as TvShowDetails)?.name : (data as MovieDetails)?.title;
@@ -100,7 +100,7 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
       }
       <CastListWrapper>
         {data.credits.cast.map((cast) => {
-          console.log(cast)
+          // console.log(data)
           return (
             <></>
           )

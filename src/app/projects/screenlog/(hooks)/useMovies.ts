@@ -31,10 +31,11 @@ export function useGetPopular(page = 1) {
   })
 }
 
-export function useGetMovie(id: number) {
+export function useGetMovie(id: number, enabled: boolean = true) {
   return useQuery({
     queryKey: ["movies", id],
-    queryFn: () => getMovie(id)
+    queryFn: () => getMovie(id),
+    enabled,
   })
 }
 

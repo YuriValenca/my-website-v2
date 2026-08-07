@@ -31,10 +31,11 @@ export function useGetPopularTvShows(page = 1) {
   });
 }
 
-export function useGetTvShow(id: number) {
+export function useGetTvShow(id: number, enabled: boolean = true) {
   return useQuery({
     queryKey: ["tv-shows", id],
     queryFn: () => getTvShow(id),
+    enabled,
   });
 }
 
