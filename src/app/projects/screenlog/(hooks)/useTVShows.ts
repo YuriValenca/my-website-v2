@@ -42,9 +42,9 @@ export function useGetTvShow(id: number, enabled: boolean = true) {
 export function useGetTVShowsPageData(options?: { enabled?: boolean }) {
   const results = useQueries({
     queries: [
-      { queryKey: ["movies", "latest"], queryFn: getLatestTvShows, enabled: options?.enabled ?? true },
-      { queryKey: ["movies", "top-rated"], queryFn: getTopRatedTvShows, enabled: options?.enabled ?? true },
-      { queryKey: ["movies", "popular"], queryFn: () => getPopularTvShows(), enabled: options?.enabled ?? true },
+      { queryKey: ["tv-shows", "latest"], queryFn: getLatestTvShows, enabled: options?.enabled ?? true },
+      { queryKey: ["tv-shows", "top-rated"], queryFn: getTopRatedTvShows, enabled: options?.enabled ?? true },
+      { queryKey: ["tv-shows", "popular"], queryFn: () => getPopularTvShows(), enabled: options?.enabled ?? true },
     ]
   });
 
