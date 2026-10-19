@@ -4,10 +4,15 @@ import { theme } from "@/shared/theme/theme";
 export const MediaDetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: ${theme.spacing.enormous};
 
   > *:not(:first-of-type) {
-    margin-bottom: ${theme.spacing.medium};
+    margin-bottom: ${theme.spacing.large};
     padding: ${theme.spacing.none} 10%;
+  }
+
+  @media (max-width: ${theme.breakpoints.xl}) {
+    padding-bottom: ${theme.spacing.xxlarge};
   }
 
   @media (max-width: ${theme.breakpoints.md}) {
@@ -90,9 +95,40 @@ export const Tagline = styled.small`
 `;
 
 export const TextInfo = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: ${theme.spacing.xsmall};
   font-size: ${theme.fontSize.xsm};
   color: ${theme.colors.text.secondary};
   line-height: 1.25;
+`;
+
+export const Certification = styled.span`
+  padding: 0 ${theme.spacing.micro};
+  border: 1.5px solid ${theme.colors.text.secondary};
+  border-radius: 3px;
+  font-size: ${theme.fontSize.tooltip};
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: ${theme.colors.text.primary};
+  line-height: 1.6;
+`;
+
+export const ActionsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: ${theme.spacing.xsmall};
+  margin-top: ${theme.spacing.micro};
+
+  button {
+    font-size: ${theme.fontSize.md};
+  }
+
+  svg {
+    width: ${theme.spacing.small};
+    height: ${theme.spacing.small};
+  }
 `;
 
 export const RatingCount = styled.p`
@@ -108,7 +144,7 @@ export const SectionTitle = styled.p`
   letter-spacing: ${theme.spacing.nano};
 `;
 
-export const OverviewWrapper = styled.div`
+export const SectionWrapper = styled.div`
   hr {
     margin: ${theme.spacing.xsmall} ${theme.spacing.none};
     color: ${theme.colors.border.default};
@@ -121,5 +157,3 @@ export const OverviewContent = styled.p`
   text-transform: none;
   letter-spacing: normal;
 `;
-
-export const CastListWrapper = styled.div``;

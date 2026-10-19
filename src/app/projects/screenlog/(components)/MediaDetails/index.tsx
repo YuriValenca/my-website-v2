@@ -1,22 +1,46 @@
 "use client";
 
+import { ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import Spinner from "@/shared/components/Spinner";
+import Button from "@/shared/components/Button";
+import { theme } from "@/shared/theme/theme";
+import { formatDate } from "@/shared/utils/stringUtils";
+import PlayIcon from "../../../../../shared/assets/icons/playIcon.svg";
 import { useGetMovie } from "../../(hooks)/useMovies";
 import { useGetTvShow } from "../../(hooks)/useTVShows";
-import {
-  BackdropFade, BackdropImage, BackdropWrapper, CastListWrapper, HeroSection,
-  InfoWrapper, MediaDetailWrapper, OverviewContent, OverviewWrapper,
-  PosterImage, RatingCount, SectionTitle, Tagline, TextInfo } from "./style";
-import { Rating, RatingWrapper, Tag, Tags, Title } from "../MovieHighlight/style";
-import { useRouter } from "next/navigation";
+import { getMediaSections, getTrailerUrl } from "../../(helpers)/mediaDetails";
 import { TvShowDetails } from "../../(types)/tv-shows";
 import { MovieDetails } from "../../(types)/movies";
-import { formatDate } from "@/shared/utils/stringUtils";
+import { Rating, RatingWrapper, Tag, Tags, Title } from "../MovieHighlight/style";
+import CastList from "../CastList";
+import KeyCrew from "../KeyCrew";
+import DetailStats from "../DetailStats";
+import Recommendations from "../Recommendations";
+import {
+  ActionsWrapper, BackdropFade, BackdropImage, BackdropWrapper, Certification, HeroSection,
+  InfoWrapper, MediaDetailWrapper, OverviewContent, PosterImage, RatingCount, SectionTitle,
+  SectionWrapper, Tagline, TextInfo } from "./style";
 
 interface MediaDetailsProps {
   id: number;
   isTVShow?: boolean;
 }
+
+interface DetailSectionProps {
+  title: string;
+  children: ReactNode;
+}
+
+const MIN_STATS_TO_SHOW = 2;
+
+const DetailSection = ({ title, children }: DetailSectionProps) => (
+  <SectionWrapper>
+    <SectionTitle>{title}</SectionTitle>
+    <hr />
+    {children}
+  </SectionWrapper>
+);
 
 const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
   const router = useRouter();
@@ -48,6 +72,9 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
   if (isLoading) return <Spinner />;
   if (!data) return null;
 
+  const { certification, stats, keyCrew, recommendations } = getMediaSections(data, isTVShow);
+  const trailerUrl = getTrailerUrl(data.videos);
+
   return (
     <MediaDetailWrapper>
       <BackdropWrapper>
@@ -73,8 +100,11 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
             ))}
           </Tags>
           <Title>{mediaTitle}</Title>
-          {data.tagline && <Tagline>"{data.tagline}"</Tagline>}
-          <TextInfo>{displayTextInfo()}</TextInfo>
+          {data.tagline && <Tagline>&ldquo;{data.tagline}&rdquo;</Tagline>}
+          <TextInfo>
+            {certification && <Certification>{certification}</Certification>}
+            {displayTextInfo()}
+          </TextInfo>
           <RatingWrapper>
             <Rating voteValue={data.vote_average}>
               {data.vote_average.toFixed(1)}
@@ -86,26 +116,44 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
               {'Averaged from ' + data.vote_count + ' users'}
             </RatingCount>
           }
-          {/* Control buttons to be implemented after login */}
+          {trailerUrl &&
+            <ActionsWrapper>
+              <Button
+                bg={theme.colors.neutral.gray100}
+                textColor={theme.colors.text.dark}
+                text="Watch trailer"
+                icon={<PlayIcon />}
+                onClick={() => window.open(trailerUrl, "_blank", "noopener,noreferrer")}
+              />
+            </ActionsWrapper>
+          }
         </InfoWrapper>
       </HeroSection>
       {data.overview &&
-        <OverviewWrapper>
-          <SectionTitle>Overview</SectionTitle>
-          <hr />
-          <OverviewContent>
-            {data.overview}
-          </OverviewContent>
-        </OverviewWrapper>
+        <DetailSection title="Overview">
+          <OverviewContent>{data.overview}</OverviewContent>
+        </DetailSection>
       }
-      <CastListWrapper>
-        {data.credits.cast.map((cast) => {
-          // console.log(data)
-          return (
-            <></>
-          )
-        })}
-      </CastListWrapper>
+      {stats.length >= MIN_STATS_TO_SHOW &&
+        <DetailSection title="Details">
+          <DetailStats stats={stats} />
+        </DetailSection>
+      }
+      {data.credits.cast.length > 0 &&
+        <DetailSection title="Cast">
+          <CastList cast={data.credits.cast} />
+        </DetailSection>
+      }
+      {keyCrew.length > 0 &&
+        <DetailSection title="Key crew">
+          <KeyCrew crew={keyCrew} />
+        </DetailSection>
+      }
+      {recommendations.length > 0 &&
+        <DetailSection title="More like this">
+          <Recommendations items={recommendations} isTVShow={isTVShow} />
+        </DetailSection>
+      }
     </MediaDetailWrapper>
   );
 };

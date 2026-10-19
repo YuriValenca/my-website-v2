@@ -10,8 +10,17 @@ const DATE_FORMATS: Record<string, Intl.DateTimeFormatOptions> = {
   monthYear: { month: "long", year: "numeric" },
 };
 
+// Date-only strings ("2024-03-01") are parsed as UTC midnight, so formatting in UTC keeps the same calendar day
 export const formatDate = (date: string | undefined, format: keyof typeof DATE_FORMATS = "default", locale = "en-US") => {
   if (!date) return null;
   const options = DATE_FORMATS[format] ?? DATE_FORMATS.default;
-  return new Intl.DateTimeFormat(locale, options).format(new Date(date));
+  return new Intl.DateTimeFormat(locale, { ...options, timeZone: "UTC" }).format(new Date(date));
 };
+
+export const formatCompactCurrency = (value: number, currency = "USD", locale = "en-US") =>
+  new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(value);

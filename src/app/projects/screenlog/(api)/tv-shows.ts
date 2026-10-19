@@ -52,7 +52,10 @@ async function searchTvShows(query: string): Promise<TvShowList> {
 }
 
 async function getTvShow(id: number): Promise<TvShowDetails> {
-  const res = await fetch(`${BASE_URL}/tv/${id}?append_to_response=credits`, { headers });
+  const res = await fetch(
+    `${BASE_URL}/tv/${id}?append_to_response=credits,videos,recommendations,content_ratings`,
+    { headers }
+  );
 
   if (!res.ok) throw new Error(`Failed to fetch TV show: ${res.status}`);
 

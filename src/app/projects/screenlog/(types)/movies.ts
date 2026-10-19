@@ -42,12 +42,38 @@ export interface CrewMember {
   profile_path: string | null;
 }
 
+export interface Video {
+  id: string;
+  key: string;
+  site: string;
+  type: string;
+  official: boolean;
+}
+
+export interface VideoList {
+  results: Video[];
+}
+
+export interface ReleaseDate {
+  certification: string;
+  type: number;
+}
+
+export interface CountryReleaseDates {
+  iso_3166_1: string;
+  release_dates: ReleaseDate[];
+}
+
 export interface MovieDetails extends MediaBase {
   title: string;
   release_date: string;
   runtime: number | null;
   budget: number | null;
   revenue: number | null;
+  original_language: string;
+  release_dates: { results: CountryReleaseDates[] };
+  videos: VideoList;
+  recommendations: MovieList;
 }
 
 export interface MovieList {

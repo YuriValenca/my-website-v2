@@ -1,13 +1,6 @@
 import styled from "@emotion/styled";
 import { theme } from "@/shared/theme/theme";
-
-const getRatingColor = (vote: number | undefined): string => {
-  if (!vote) return theme.colors.feedback.badRating;
-  if (vote >= 7) return theme.colors.feedback.goodRating;
-  if (vote >= 5) return theme.colors.feedback.avgRating;
-  if (vote >= 3) return theme.colors.feedback.badRating;
-  return theme.colors.feedback.horribleRating;
-};
+import { getRatingColor } from "../../(helpers)/getRatingColor";
 
 export const MovieHighlightWrapper = styled.div`
   display: flex;

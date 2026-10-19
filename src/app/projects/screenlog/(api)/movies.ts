@@ -41,7 +41,7 @@ async function getPopular(page?: number): Promise<MovieList> {
 
 async function getMovie(id: number): Promise<MovieDetails> {
   const res = await fetch (
-    `${BASE_URL}/movie/${id}?append_to_response=credits`,
+    `${BASE_URL}/movie/${id}?append_to_response=credits,videos,recommendations,release_dates`,
     { headers }
   )
 
