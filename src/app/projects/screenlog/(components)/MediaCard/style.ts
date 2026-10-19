@@ -3,6 +3,7 @@ import Link from "next/link";
 import { theme } from "@/shared/theme/theme";
 import { getRatingColor } from "../../(helpers)/getRatingColor";
 import { HOVER_SCALE, HOVER_TRANSITION, hoverScale } from "../../(helpers)/interactions";
+import TmdbImage from "../TmdbImage";
 
 export const MediaCardWrapper = styled(Link)`
   display: flex;
@@ -16,24 +17,15 @@ export const MediaCardWrapper = styled(Link)`
 
 export const PosterFrame = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   aspect-ratio: 2 / 3;
   overflow: hidden;
   background-color: ${theme.colors.screenlog.posterBackground};
   border: 1px solid ${theme.colors.screenlog.posterBorder};
   border-radius: ${theme.borderRadius.small};
   transition: ${HOVER_TRANSITION};
-
-  svg {
-    width: ${theme.spacing.xxxlarge};
-    height: ${theme.spacing.xxxlarge};
-    fill: ${theme.colors.border.input};
-  }
 `;
 
-export const CardPoster = styled.img`
+export const CardPoster = styled(TmdbImage)`
   position: absolute;
   inset: 0;
   width: 100%;

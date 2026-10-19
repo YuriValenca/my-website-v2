@@ -1,6 +1,4 @@
 import { formatDate } from "@/shared/utils/stringUtils";
-import MediaPlaceholder from "../../../../../shared/assets/icons/emptyMediaIcon.svg";
-import { tmdbImage } from "../../(helpers)/tmdbImage";
 import {
   CardGenre, CardOverlay, CardPoster, CardRating, CardTitle,
   CardYear, MediaCardWrapper, PosterFrame,
@@ -18,10 +16,7 @@ interface MediaCardProps {
 const MediaCard = ({ href, title, posterPath, releaseDate, vote, genre }: MediaCardProps) => (
   <MediaCardWrapper href={href}>
     <PosterFrame>
-      {posterPath
-        ? <CardPoster src={tmdbImage(posterPath, "w342")} alt="" loading="lazy" />
-        : <MediaPlaceholder />
-      }
+      <CardPoster path={posterPath} size="w342" alt="" />
       <CardOverlay />
       {!!vote && <CardRating voteValue={vote}>{vote.toFixed(1)}</CardRating>}
       {genre && <CardGenre>{genre}</CardGenre>}

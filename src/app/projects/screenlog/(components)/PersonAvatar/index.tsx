@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { getAbbreviation } from "../../(helpers)/getAbbreviation";
 import { tmdbImage } from "../../(helpers)/tmdbImage";
 import { AvatarImage, AvatarInitials } from "./style";
@@ -9,7 +10,9 @@ interface PersonAvatarProps {
 }
 
 const PersonAvatar = ({ name, profilePath, diameter }: PersonAvatarProps) => {
-  if (!profilePath) {
+  const [failedPath, setFailedPath] = useState<string | null>(null);
+
+  if (!profilePath || failedPath === profilePath) {
     return <AvatarInitials diameter={diameter} aria-hidden>{getAbbreviation(name)}</AvatarInitials>;
   }
 
@@ -19,6 +22,7 @@ const PersonAvatar = ({ name, profilePath, diameter }: PersonAvatarProps) => {
       src={tmdbImage(profilePath, "w185")}
       alt=""
       loading="lazy"
+      onError={() => setFailedPath(profilePath)}
     />
   );
 };

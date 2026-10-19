@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { theme } from "@/shared/theme/theme";
 import { getRatingColor } from "../../(helpers)/getRatingColor";
+import TmdbImage from "../TmdbImage";
 
 export const MovieHighlightWrapper = styled.div`
   display: flex;
@@ -13,23 +14,26 @@ export const TopRow = styled.div`
   flex-direction: row;
   align-items: center;
   gap: ${theme.spacing.large};
+`;
 
-  img {
-    border: 2px solid ${theme.colors.border.default};
-    border-radius: ${theme.borderRadius.medium};
-    width: 200px;
-    height: 300px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+export const HighlightPoster = styled(TmdbImage)`
+  flex-shrink: 0;
+  border: 2px solid ${theme.colors.border.default};
+  border-radius: ${theme.borderRadius.medium};
+  background-color: ${theme.colors.screenlog.posterBackground};
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 
-    :hover {
-      transform: scale(1.05);
-    }
+  &:hover {
+    transform: scale(1.05);
+  }
 
-    @media (max-width: ${theme.breakpoints.tablet}) {
-      width: 150px;
-      height: 225px;
-    }
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    width: 150px;
+    height: 225px;
   }
 `;
 

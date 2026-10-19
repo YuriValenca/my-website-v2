@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { theme } from "@/shared/theme/theme";
+import TmdbImage from "../TmdbImage";
 
 export const MediaDetailWrapper = styled.div`
   display: flex;
@@ -61,12 +62,13 @@ export const HeroSection = styled.div`
   }
 `;
 
-export const PosterImage = styled.img`
+export const PosterImage = styled(TmdbImage)`
   width: 160px;
   height: 240px;
   object-fit: cover;
   border-radius: ${theme.borderRadius.medium};
   border: 2px solid ${theme.colors.border.default};
+  background-color: ${theme.colors.screenlog.posterBackground};
   flex-shrink: 0;
 
   @media (max-width: ${theme.breakpoints.tablet}) {

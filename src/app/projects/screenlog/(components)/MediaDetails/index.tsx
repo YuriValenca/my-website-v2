@@ -86,8 +86,10 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
       </BackdropWrapper>
       <HeroSection>
         <PosterImage
-          src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
+          path={data.poster_path}
+          size="w500"
           alt={mediaTitle}
+          loading="eager"
         />
         <InfoWrapper>
           <Tags>

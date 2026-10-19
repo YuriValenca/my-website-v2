@@ -4,8 +4,6 @@ import { Person } from "../../../(types)/people";
 import { MediaType } from "../../../(types)/searchResults";
 import { TvShow } from "../../../(types)/tv-shows";
 import { MediaDetailContent, MediaDetails, PersonDetails, Poster, PosterWrapper, ResultCardWrapper, ResultDetailsWrapper, ResultTitle } from "./style";
-import MediaPlaceholder from "../../../../../../shared/assets/icons/emptyMediaIcon.svg";
-import PersonPlaceholder from "../../../../../../shared/assets/icons/emptyPeopleIcon.svg";
 import { useRouter } from "next/navigation";
 import { screenlogRoutes } from "../../../(helpers)/routes";
 
@@ -13,8 +11,6 @@ interface ResultCardProps {
   item: Movie | TvShow | Person;
   mediaType: MediaType;
 }
-
-const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w185";
 
 const ROUTE_BY_MEDIA_TYPE: Record<MediaType, (id: number) => string> = {
   movie: screenlogRoutes.movie,
@@ -66,10 +62,12 @@ const ResultCard = ({ item, mediaType }: ResultCardProps) => {
       onClick={() => router.push(ROUTE_BY_MEDIA_TYPE[mediaType](item.id))}
     >
       <PosterWrapper variant={mediaType}>
-        {imagePath
-          ? <Poster src={`${TMDB_IMAGE_BASE}${imagePath}`} alt={label} />
-          : mediaType === "person" ? <PersonPlaceholder /> : <MediaPlaceholder />
-        }
+        <Poster
+          path={imagePath}
+          size="w185"
+          alt={label}
+          variant={mediaType === "person" ? "person" : "media"}
+        />
       </PosterWrapper>
       <ResultDetailsWrapper>
         <ResultTitle>

@@ -4,7 +4,7 @@ import { useGenres } from "../../(context)/context";
 import { Movie } from "../../(types)/movies";
 import Button from "@/shared/components/Button";
 import RandomizeIcon from "../../../../../shared/assets/icons/randomizeIcon.svg";
-import { ButtonsWrapper, DetailsWrapper, ExtraInfo, MovieHighlightWrapper, Overview, RatingWrapper, Rating, Tag, Tags, Title, TopRow } from "./style";
+import { ButtonsWrapper, DetailsWrapper, ExtraInfo, HighlightPoster, MovieHighlightWrapper, Overview, RatingWrapper, Rating, Tag, Tags, Title, TopRow } from "./style";
 import { theme } from "@/shared/theme/theme";
 import { getSurpriseMovie } from "../../(helpers)/getSurpriseMovie";
 import { screenlogRoutes } from "../../(helpers)/routes";
@@ -55,10 +55,12 @@ const MovieHighlight = ({ data }: MovieHighlightProps) => {
   return (
     <MovieHighlightWrapper>
       <TopRow>
-        <img
-          src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
+        <HighlightPoster
+          path={data?.poster_path ?? null}
+          size="original"
+          alt={data?.title ?? ""}
+          loading="eager"
           onClick={() => goToMovie(data?.id)}
-          alt={data?.title}
         />
         <DetailsWrapper>
           <Tags>
