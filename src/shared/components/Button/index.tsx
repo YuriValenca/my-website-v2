@@ -3,29 +3,32 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
   text: string;
-  bg: string;
-  textColor: string;
   onClick: () => void;
-  isBold?: Boolean;
+  variant?: "solid" | "outline";
+  bg?: string;
+  textColor?: string;
+  isBold?: boolean;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
 }
 
 const Button = ({
   text,
+  onClick,
+  variant = "solid",
   bg,
   textColor,
-  onClick,
   isBold = false,
   icon,
   iconPosition = "left",
 }: ButtonProps) => {
   return (
     <StyledButton
+      data-variant={variant}
       data-bold={isBold}
       data-icon-position={iconPosition}
       onClick={onClick}
-      style={{ backgroundColor: bg, color: textColor }}
+      style={variant === "solid" ? { backgroundColor: bg, color: textColor } : undefined}
     >
       {icon && iconPosition === "left" && icon}
       {text}

@@ -43,10 +43,9 @@ const MovieHighlight = ({ data }: MovieHighlightProps) => {
           textColor={theme.colors.text.dark}
         />
         <Button
-          bg="transparent"
+          variant="outline"
           onClick={handleSurpriseMe}
           text="Surprise me"
-          textColor={theme.colors.text.secondary}
           icon={<RandomizeIcon />}
         />
       </ButtonsWrapper>

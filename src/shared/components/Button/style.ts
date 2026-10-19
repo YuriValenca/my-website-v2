@@ -16,6 +16,20 @@ export const StyledButton = styled.button`
     opacity: 0.7;
   }
 
+  &[data-variant="outline"] {
+    background-color: transparent;
+    border: 1px solid ${theme.colors.border.default};
+    color: ${theme.colors.text.secondary};
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+      background-color: ${theme.colors.background.surface};
+      border-color: ${theme.colors.border.focus};
+      color: ${theme.colors.text.primary};
+    }
+  }
+
   &[data-bold="true"] {
     font-weight: bold;
   }

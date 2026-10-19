@@ -106,8 +106,4 @@ export const ButtonsWrapper = styled.div`
     font-size: ${theme.fontSize.md};
     padding: ${theme.spacing.xsmall} ${theme.spacing.medium};
   }
-
-  button:last-of-type {
-    border: 1px solid ${theme.colors.border.default};
-  }
 `;
