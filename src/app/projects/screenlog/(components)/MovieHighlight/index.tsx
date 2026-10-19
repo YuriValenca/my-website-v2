@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useBreakpoint } from "@/shared/hooks/useBreakpoint";
 import { useGenres } from "../../(context)/context";
 import { Movie } from "../../(types)/movies";
 import Button from "@/shared/components/Button";
@@ -14,18 +14,10 @@ interface MovieHighlightProps {
   totalResults: number | undefined;
 }
 
-const TABLET_BREAKPOINT = parseInt(theme.breakpoints.tablet);
-
 const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
   const router = useRouter();
   const genreList = useGenres().movieGenres;
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < TABLET_BREAKPOINT);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const isMobile = useBreakpoint("tablet");
 
   const displayGenres = genreList
     .filter(genre => data?.genre_ids.includes(genre.id))

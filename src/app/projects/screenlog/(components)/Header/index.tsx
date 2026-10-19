@@ -2,26 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useBreakpoint } from "@/shared/hooks/useBreakpoint";
 import HeaderOption from "./HeaderOption";
 import SearchIcon from "../../../../../shared/assets/icons/searchIcon.svg";
 import { HeaderWrapper, OptionsContainer, SearchContainer, Title } from "./style";
 import SearchBar from "./SearchBar";
 import SearchOverlay from "./SearchOverlay";
-import { theme } from "@/shared/theme/theme";
-
-const TABLET_BREAKPOINT = parseInt(theme.breakpoints.tablet);
 
 const ScreenlogHeader = () => {
   const router = useRouter();
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useBreakpoint("tablet");
   const searchContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < TABLET_BREAKPOINT);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     if (isMobile) return;
