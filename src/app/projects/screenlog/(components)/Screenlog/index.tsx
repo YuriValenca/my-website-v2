@@ -15,11 +15,11 @@ const Screenlog = () => {
   const { data: movieGenres = [] } = useGetGenres();
   const { data: tvGenres = [] } = useGetTvGenres();
 
-  // Get random movies. The min is fallback JIC the popular endpoint returns less than 20 movies.
   const randomPopMovie = useMemo(() => {
-    if (!popular?.total_results) return 0;
-    return randomRange(0, Math.min(20, popular.total_results));
-  }, [popular?.total_results]);
+    const movieCount = popular?.results.length ?? 0;
+    if (!movieCount) return 0;
+    return randomRange(0, movieCount - 1);
+  }, [popular?.results.length]);
 
   if (isLoading) return <Spinner />;
   if (isError) return <div>Error</div>
