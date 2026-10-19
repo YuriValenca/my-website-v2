@@ -12,8 +12,13 @@ export const StyledButton = styled.button`
   font-size: ${theme.fontSize.normal};
   transition: opacity 0.3s ease;
 
-  &:hover {
+  &:hover:not(:disabled) {
     opacity: 0.7;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   &[data-variant="outline"] {
@@ -22,7 +27,7 @@ export const StyledButton = styled.button`
     color: ${theme.colors.text.secondary};
     transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
-    &:hover {
+    &:hover:not(:disabled) {
       opacity: 1;
       background-color: ${theme.colors.background.surface};
       border-color: ${theme.colors.border.focus};
