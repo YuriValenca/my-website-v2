@@ -3,10 +3,9 @@ import { useRouter } from "next/navigation";
 import Input from "@/shared/components/Input";
 import { useSearchMulti } from "../../../(hooks)/useSearch";
 import { SearchResultItem } from "../../../(types)/searchResults";
-import PersonIcon from "../../../../../../shared/assets/icons/personIcon.svg";
-import MovieIcon from "../../../../../../shared/assets/icons/movieIcon.svg";
+import { screenlogRoutes } from "../../../(helpers)/routes";
 import SearchIcon from "../../../../../../shared/assets/icons/searchIcon.svg";
-import TVIcon from "../../../../../../shared/assets/icons/tvIcon.svg"
+import { getItemLabel, getItemRoute, MEDIA_TYPE_CONFIG, MIN_QUERY_LENGTH, rankResults } from "../searchSuggestions";
 import {
   SearchBarWrapper,
   Dropdown,
@@ -22,34 +21,13 @@ interface SearchBarProps {
   onClose: () => void;
 }
 
-const RESULTS_LIMIT = 8;
-const MIN_QUERY_LENGTH = 2;
-const MEDIA_TYPE_CONFIG = {
-  tv:     { label: "TV Show", icon: <TVIcon /> },
-  movie:  { label: "Movie",   icon: <MovieIcon /> },
-  person: { label: "People",  icon: <PersonIcon /> },
-} satisfies Record<string, { label: string; icon: React.ReactNode }>;
-
-const getItemLabel = (item: SearchResultItem) => "title" in item ? item.title : item.name;
-
-const getItemRoute = (item: SearchResultItem) => {
-  if (item.media_type === "person") return `/projects/screenlog/people/${item.id}`;
-  if (item.media_type === "tv") return `/projects/screenlog/tv-show/${item.id}`;
-  return `/projects/screenlog/movie/${item.id}`;
-};
-
-const filterAndRankResults = (results: SearchResultItem[]): SearchResultItem[] =>
-  results
-    .sort((a, b) => b.popularity - a.popularity)
-    .slice(0, RESULTS_LIMIT);
-
 const SearchBar = ({ visible, onClose }: SearchBarProps) => {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const { data, isFetching } = useSearchMulti(query);
 
   const isOpen = query.length > MIN_QUERY_LENGTH;
-  const results = filterAndRankResults(data?.results ?? []);
+  const results = rankResults(data?.results ?? []);
 
   const handleItemClick = (item: SearchResultItem) => {
     setQuery("");
@@ -60,7 +38,7 @@ const SearchBar = ({ visible, onClose }: SearchBarProps) => {
   const handleSeeAll = () => {
     setQuery("");
     onClose();
-    router.push(`/projects/screenlog/search?query=${encodeURIComponent(query)}`);
+    router.push(screenlogRoutes.search(query));
   };
 
   return (

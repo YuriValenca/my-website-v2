@@ -3,10 +3,10 @@ import { useRouter } from "next/navigation";
 import Input from "@/shared/components/Input";
 import { useSearchMulti } from "../../../(hooks)/useSearch";
 import { SearchResultItem } from "../../../(types)/searchResults";
-import PersonIcon from "../../../../../../shared/assets/icons/personIcon.svg";
-import MovieIcon from "../../../../../../shared/assets/icons/movieIcon.svg";
+import { screenlogRoutes } from "../../../(helpers)/routes";
 import SearchIcon from "../../../../../../shared/assets/icons/searchIcon.svg";
 import CloseIcon from "../../../../../../shared/assets/icons/closeIcon.svg";
+import { getItemLabel, getItemRoute, MEDIA_TYPE_CONFIG, MIN_QUERY_LENGTH, rankResults } from "../searchSuggestions";
 import {
   Overlay,
   OverlayHeader,
@@ -24,28 +24,13 @@ interface SearchOverlayProps {
   onClose: () => void;
 }
 
-const RESULTS_LIMIT = 8;
-const MIN_QUERY_LENGTH = 2;
-
-const getItemLabel = (item: SearchResultItem) => "title" in item ? item.title : item.name;
-
-const getItemRoute = (item: SearchResultItem) => item.media_type === "person"
-  ? `/projects/screenlog/people/${item.id}`
-  : `/projects/screenlog/movie/${item.id}`;
-
-const filterAndRankResults = (results: SearchResultItem[]): SearchResultItem[] =>
-  results
-    .filter((item) => item.media_type !== "tv")
-    .sort((a, b) => b.popularity - a.popularity)
-    .slice(0, RESULTS_LIMIT);
-
 const SearchOverlay = ({ visible, onClose }: SearchOverlayProps) => {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const { data, isFetching } = useSearchMulti(query);
 
   const isOpen = query.length > MIN_QUERY_LENGTH;
-  const results = filterAndRankResults(data?.results ?? []);
+  const results = rankResults(data?.results ?? []);
 
   useEffect(() => {
     if (!visible) setQuery("");
@@ -67,7 +52,7 @@ const SearchOverlay = ({ visible, onClose }: SearchOverlayProps) => {
 
   const handleSeeAll = () => {
     onClose();
-    router.push(`/projects/screenlog/search?query=${encodeURIComponent(query)}`);
+    router.push(screenlogRoutes.search(query));
   };
 
   return (
@@ -87,15 +72,16 @@ const SearchOverlay = ({ visible, onClose }: SearchOverlayProps) => {
           {results.length === 0 && (
             <EmptyQuery>No results matched your query</EmptyQuery>
           )}
-          {results.map((item) => (
-            <DropdownItem key={item.id} onClick={() => handleItemClick(item)}>
-              {item.media_type === "person" ? <PersonIcon /> : <MovieIcon />}
-              <ItemLabel>{getItemLabel(item)}</ItemLabel>
-              <ItemCategory>
-                {item.media_type === "person" ? "People" : "Movies"}
-              </ItemCategory>
-            </DropdownItem>
-          ))}
+          {results.map((item) => {
+            const { label, icon } = MEDIA_TYPE_CONFIG[item.media_type];
+            return (
+              <DropdownItem key={item.id} onClick={() => handleItemClick(item)}>
+                {icon}
+                <ItemLabel>{getItemLabel(item)}</ItemLabel>
+                <ItemCategory>{label}</ItemCategory>
+              </DropdownItem>
+            );
+          })}
           <SeeAllItem onClick={handleSeeAll}>
             <SearchIcon />
             <ItemLabel>
