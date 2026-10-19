@@ -27,7 +27,7 @@ const Screenlog = () => {
   return (
     <GenreContext.Provider value={{ movieGenres, tvGenres }}>
       <ScreenlogWrapper>
-        <MovieHighlight data={popular?.results[randomPopMovie]} totalResults={popular?.total_results} />
+        <MovieHighlight data={popular?.results[randomPopMovie]} />
         <MovieSection title="Latest" data={latest} />
         <MovieSection title="Popular" data={popular} />
         <MovieSection title="Top Rated" data={topRated} />

@@ -32,7 +32,7 @@ async function getTopRated(): Promise<MovieList> {
 }
 
 async function getPopular(page?: number): Promise<MovieList> {
-  const res = await fetch(`${BASE_URL}/movie/popular${page ? `?page = ${page}` : ''}`, { headers })
+  const res = await fetch(`${BASE_URL}/movie/popular${page ? `?page=${page}` : ''}`, { headers })
 
   if (!res.ok) throw new Error (`Failed to fetch popular movies: ${res.status}`)  
 
@@ -50,10 +50,22 @@ async function getMovie(id: number): Promise<MovieDetails> {
   return res.json() as Promise<MovieDetails>;
 }
 
+async function discoverMovies(minVoteCount: number, page = 1): Promise<MovieList> {
+  const res = await fetch(
+    `${BASE_URL}/discover/movie?include_adult=false&sort_by=popularity.desc&vote_count.gte=${minVoteCount}&page=${page}`,
+    { headers }
+  );
+
+  if (!res.ok) throw new Error(`Failed to discover movies: ${res.status}`);
+
+  return res.json() as Promise<MovieList>;
+}
+
 export {
   getGenres,
   getLatest,
   getTopRated,
   getPopular,
   getMovie,
+  discoverMovies,
 }

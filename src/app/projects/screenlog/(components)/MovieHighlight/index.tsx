@@ -6,16 +6,15 @@ import Button from "@/shared/components/Button";
 import RandomizeIcon from "../../../../../shared/assets/icons/randomizeIcon.svg";
 import { ButtonsWrapper, DetailsWrapper, ExtraInfo, MovieHighlightWrapper, Overview, RatingWrapper, Rating, Tag, Tags, Title, TopRow } from "./style";
 import { theme } from "@/shared/theme/theme";
-import { getPopular } from "../../(api)/movies";
+import { getSurpriseMovie } from "../../(helpers)/getSurpriseMovie";
 import { screenlogRoutes } from "../../(helpers)/routes";
 import { formatDate } from "@/shared/utils/stringUtils";
 
 interface MovieHighlightProps {
   data: Movie | undefined;
-  totalResults: number | undefined;
 }
 
-const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
+const MovieHighlight = ({ data }: MovieHighlightProps) => {
   const router = useRouter();
   const genreList = useGenres().movieGenres;
   const isMobile = useBreakpoint("tablet");
@@ -29,13 +28,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
   };
 
   const handleSurpriseMe = async () => {
-    if (!totalResults) return;
-    const randomIndex = Math.floor(Math.random() * totalResults);
-    const randomPage = Math.floor(randomIndex / 20) + 1;
-    const randomIndexOnPage = randomIndex % 20;
-
-    const result = await getPopular(randomPage);
-    const movie = result.results[randomIndexOnPage];
+    const movie = await getSurpriseMovie();
     goToMovie(movie?.id);
   }
 
