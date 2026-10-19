@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useBreakpoint } from "@/shared/hooks/useBreakpoint";
 import { useGenres } from "../../(context)/context";
@@ -18,6 +19,7 @@ const MovieHighlight = ({ data }: MovieHighlightProps) => {
   const router = useRouter();
   const genreList = useGenres().movieGenres;
   const isMobile = useBreakpoint("tablet");
+  const [isPicking, setIsPicking] = useState(false);
 
   const displayGenres = genreList
     .filter(genre => data?.genre_ids.includes(genre.id))
@@ -27,9 +29,12 @@ const MovieHighlight = ({ data }: MovieHighlightProps) => {
     if (id) router.push(screenlogRoutes.movie(id));
   };
 
+  // Only re-enabled when nothing was picked: on success the page is about to navigate away
   const handleSurpriseMe = async () => {
-    const movie = await getSurpriseMovie();
-    goToMovie(movie?.id);
+    setIsPicking(true);
+    const movie = await getSurpriseMovie().catch(() => undefined);
+    if (movie) return goToMovie(movie.id);
+    setIsPicking(false);
   }
 
   const overviewAndButtons = (
@@ -45,7 +50,8 @@ const MovieHighlight = ({ data }: MovieHighlightProps) => {
         <Button
           variant="outline"
           onClick={handleSurpriseMe}
-          text="Surprise me"
+          disabled={isPicking}
+          text={isPicking ? "Picking..." : "Surprise me"}
           icon={<RandomizeIcon />}
         />
       </ButtonsWrapper>

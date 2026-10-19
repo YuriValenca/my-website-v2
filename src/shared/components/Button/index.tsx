@@ -5,6 +5,7 @@ interface ButtonProps {
   text: string;
   onClick: () => void;
   variant?: "solid" | "outline";
+  disabled?: boolean;
   bg?: string;
   textColor?: string;
   isBold?: boolean;
@@ -16,6 +17,7 @@ const Button = ({
   text,
   onClick,
   variant = "solid",
+  disabled = false,
   bg,
   textColor,
   isBold = false,
@@ -28,6 +30,7 @@ const Button = ({
       data-bold={isBold}
       data-icon-position={iconPosition}
       onClick={onClick}
+      disabled={disabled}
       style={variant === "solid" ? { backgroundColor: bg, color: textColor } : undefined}
     >
       {icon && iconPosition === "left" && icon}
