@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useBreakpoint } from "@/shared/hooks/useBreakpoint";
+import { screenlogRoutes } from "../../(helpers)/routes";
 import HeaderOption from "./HeaderOption";
 import SearchIcon from "../../../../../shared/assets/icons/searchIcon.svg";
 import { HeaderWrapper, OptionsContainer, SearchContainer, Title } from "./style";
@@ -30,31 +31,22 @@ const ScreenlogHeader = () => {
     <>
       <HeaderWrapper>
         <OptionsContainer>
-          <Title onClick={() => router.push('/projects/screenlog')}>Screenlog</Title>
+          <Title onClick={() => router.push(screenlogRoutes.home())}>Screenlog</Title>
           <HeaderOption
             category="Movies"
             options={[
-              { text: 'Popular', to: '/popular' },
-              { text: 'Now playing', to: '/now-playing' },
-              { text: 'Top rated', to: '/top-rated' },
+              { text: 'Popular', to: screenlogRoutes.list('movies', 'popular') },
+              { text: 'Now playing', to: screenlogRoutes.list('movies', 'now-playing') },
+              { text: 'Top rated', to: screenlogRoutes.list('movies', 'top-rated') },
             ]}
-            link="movies/"
-          />
-          <HeaderOption
-            category="People"
-            options={[
-              { text: 'Popular', to: '/people/popular' },
-            ]}
-            link="people/"
           />
           <HeaderOption
             category="TV Shows"
             options={[
-              { text: 'Popular', to: '/popular' },
-              { text: 'Now playing', to: '/now-playing' },
-              { text: 'Top rated', to: '/top-rated' },
+              { text: 'Popular', to: screenlogRoutes.list('tv-shows', 'popular') },
+              { text: 'Now playing', to: screenlogRoutes.list('tv-shows', 'now-playing') },
+              { text: 'Top rated', to: screenlogRoutes.list('tv-shows', 'top-rated') },
             ]}
-            link="tv-shows/"
           />
         </OptionsContainer>
         <SearchContainer ref={searchContainerRef}>

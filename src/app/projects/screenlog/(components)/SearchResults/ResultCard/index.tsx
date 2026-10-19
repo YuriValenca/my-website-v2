@@ -7,6 +7,7 @@ import { MediaDetailContent, MediaDetails, PersonDetails, Poster, PosterWrapper,
 import MediaPlaceholder from "../../../../../../shared/assets/icons/emptyMediaIcon.svg";
 import PersonPlaceholder from "../../../../../../shared/assets/icons/emptyPeopleIcon.svg";
 import { useRouter } from "next/navigation";
+import { screenlogRoutes } from "../../../(helpers)/routes";
 
 interface ResultCardProps {
   item: Movie | TvShow | Person;
@@ -14,6 +15,12 @@ interface ResultCardProps {
 }
 
 const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w185";
+
+const ROUTE_BY_MEDIA_TYPE: Record<MediaType, (id: number) => string> = {
+  movie: screenlogRoutes.movie,
+  tv: screenlogRoutes.tvShow,
+  person: screenlogRoutes.person,
+};
 
 const normalizeItem = (item: Movie | TvShow | Person, mediaType: MediaType) => {
   if (mediaType === "person") {
@@ -47,19 +54,6 @@ const ResultCard = ({ item, mediaType }: ResultCardProps) => {
   const router = useRouter();
   const { label, imagePath, releaseDate, overview, department, knownFor } = normalizeItem(item, mediaType);
 
-  const handleRoute = () => {
-    if (mediaType === "person") {
-      return `person/${item.id}`;
-    }
-    if (mediaType === "tv") {
-      return `tv-show/${item.id}`;
-    }
-    if (mediaType === "movie") {
-      return `movie/${item.id}`
-    }
-    return `/`
-  }
-
   const knownForRender = () => {
     return knownFor?.map((entry) => {
       const isMovie = 'title' in entry;
@@ -69,7 +63,7 @@ const ResultCard = ({ item, mediaType }: ResultCardProps) => {
 
   return (
     <ResultCardWrapper
-      onClick={() => router.push(handleRoute())}
+      onClick={() => router.push(ROUTE_BY_MEDIA_TYPE[mediaType](item.id))}
     >
       <PosterWrapper variant={mediaType}>
         {imagePath

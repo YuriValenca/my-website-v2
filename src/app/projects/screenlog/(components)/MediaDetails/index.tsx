@@ -10,6 +10,7 @@ import PlayIcon from "../../../../../shared/assets/icons/playIcon.svg";
 import { useGetMovie } from "../../(hooks)/useMovies";
 import { useGetTvShow } from "../../(hooks)/useTVShows";
 import { getMediaSections, getTrailerUrl } from "../../(helpers)/mediaDetails";
+import { screenlogRoutes } from "../../(helpers)/routes";
 import { TvShowDetails } from "../../(types)/tv-shows";
 import { MovieDetails } from "../../(types)/movies";
 import { Rating, RatingWrapper, Tag, Tags, Title } from "../MovieHighlight/style";
@@ -93,7 +94,7 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
             {data.genres.map(genre => (
               <Tag
                 key={genre.id}
-                onClick={() => router.push(`genre/${genre.name.toLowerCase()}`)}
+                onClick={() => router.push(screenlogRoutes.genre(genre.name))}
               >
                 {genre.name}
               </Tag>

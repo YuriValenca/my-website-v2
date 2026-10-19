@@ -7,6 +7,7 @@ import RandomizeIcon from "../../../../../shared/assets/icons/randomizeIcon.svg"
 import { ButtonsWrapper, DetailsWrapper, ExtraInfo, MovieHighlightWrapper, Overview, RatingWrapper, Rating, Tag, Tags, Title, TopRow } from "./style";
 import { theme } from "@/shared/theme/theme";
 import { getPopular } from "../../(api)/movies";
+import { screenlogRoutes } from "../../(helpers)/routes";
 import { formatDate } from "@/shared/utils/stringUtils";
 
 interface MovieHighlightProps {
@@ -23,6 +24,10 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
     .filter(genre => data?.genre_ids.includes(genre.id))
     .sort((a, b) => a.name.localeCompare(b.name));
 
+  const goToMovie = (id: number | undefined) => {
+    if (id) router.push(screenlogRoutes.movie(id));
+  };
+
   const handleSurpriseMe = async () => {
     if (!totalResults) return;
     const randomIndex = Math.floor(Math.random() * totalResults);
@@ -31,7 +36,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
 
     const result = await getPopular(randomPage);
     const movie = result.results[randomIndexOnPage];
-    router.push(`screenlog/movie/${movie?.id}`)
+    goToMovie(movie?.id);
   }
 
   const overviewAndButtons = (
@@ -40,7 +45,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
       <ButtonsWrapper>
         <Button
           bg={theme.colors.neutral.gray100}
-          onClick={() => router.push(`screenlog/movie/${data?.id}`)}
+          onClick={() => goToMovie(data?.id)}
           text="See details"
           textColor={theme.colors.text.dark}
         />
@@ -60,7 +65,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
       <TopRow>
         <img
           src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
-          onClick={() => router.push(`screenlog/movie/${data?.id}`)}
+          onClick={() => goToMovie(data?.id)}
           alt={data?.title}
         />
         <DetailsWrapper>
@@ -68,7 +73,7 @@ const MovieHighlight = ({ data, totalResults }: MovieHighlightProps) => {
             {displayGenres.map(genre => (
               <Tag
                 key={genre.id}
-                onClick={() => router.push(`screenlog/genre/${genre.name.toLowerCase()}`)}
+                onClick={() => router.push(screenlogRoutes.genre(genre.name))}
               >
                 {genre.name}
               </Tag>

@@ -5,13 +5,11 @@ import { HeaderOptionWrapper, OptionItem, OptionsList } from "./style"
 interface HeaderOptionsProps {
   category: string,
   options: Option[],
-  link: string,
 }
 
 const HeaderOption = ({
   category,
   options,
-  link,
 }: HeaderOptionsProps) => {
   const [showOptions, setShowOptions] = useState(false);
 
@@ -25,7 +23,7 @@ const HeaderOption = ({
       {showOptions && (
         <OptionsList>
           {options.map((option) => (
-            <OptionItem href={link + option.to} target="_self" key={option.text}>
+            <OptionItem href={option.to} key={option.text}>
               {option.text}
             </OptionItem>
           ))}
