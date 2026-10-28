@@ -5,11 +5,14 @@ import { getRatingColor } from "../../(helpers)/getRatingColor";
 import { HOVER_SCALE, HOVER_TRANSITION, hoverScale } from "../../(helpers)/interactions";
 import TmdbImage from "../TmdbImage";
 
+export const MEDIA_CARD_WIDTH = 150;
+export const MEDIA_CARD_POSTER_HEIGHT = MEDIA_CARD_WIDTH * 1.5;
+
 export const MediaCardWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  width: 132px;
+  width: ${MEDIA_CARD_WIDTH}px;
   text-decoration: none;
 
   ${hoverScale(HOVER_SCALE.default, "> :first-of-type")};
@@ -54,21 +57,25 @@ export const CardRating = styled.span<{ voteValue: number }>`
 export const CardGenre = styled.span`
   position: absolute;
   left: ${theme.spacing.micro};
+  right: ${theme.spacing.micro};
   bottom: ${theme.spacing.micro};
-  font-size: ${theme.fontSize.tooltip};
-  letter-spacing: 1.5px;
+  font-size: ${theme.fontSize.xsm};
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-transform: uppercase;
   color: ${theme.colors.screenlog.genreText};
 `;
 
 export const CardTitle = styled.p`
   margin-top: ${theme.spacing.xsmall};
-  font-size: ${theme.fontSize.xsm};
+  font-size: ${theme.fontSize.md};
   color: ${theme.colors.text.primary};
   line-height: 1.3;
 `;
 
 export const CardYear = styled.p`
-  font-size: ${theme.fontSize.tooltip};
+  font-size: ${theme.fontSize.xsm};
   color: ${theme.colors.text.placeholder};
 `;
