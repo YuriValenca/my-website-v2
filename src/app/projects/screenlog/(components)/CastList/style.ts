@@ -3,24 +3,13 @@ import Link from "next/link";
 import { theme } from "@/shared/theme/theme";
 import { canHover, HOVER_SCALE, HOVER_TRANSITION, hoverScale } from "../../(helpers)/interactions";
 
-// The negative margin cancels the inline padding, which only exists so the hover background isn't clipped by the scroll
-export const CastListWrapper = styled.div`
-  display: flex;
-  gap: ${theme.spacing.micro};
-  overflow-x: auto;
-  padding: ${theme.spacing.micro} ${theme.spacing.xsmall} ${theme.spacing.xsmall};
-  margin: ${theme.spacing.none} -${theme.spacing.xsmall};
-  scrollbar-width: thin;
-  scrollbar-color: ${theme.colors.border.default} transparent;
-`;
-
 export const CastMemberItem = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: ${theme.spacing.micro};
   flex-shrink: 0;
-  width: 96px;
+  width: 112px;
   padding: ${theme.spacing.xsmall} ${theme.spacing.micro};
   border-radius: ${theme.borderRadius.medium};
   text-align: center;

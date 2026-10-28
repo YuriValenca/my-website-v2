@@ -7,7 +7,7 @@ interface KeyCrewProps {
   crew: KeyCrewMember[];
 }
 
-const AVATAR_DIAMETER = 36;
+const AVATAR_DIAMETER = 52;
 
 const KeyCrew = ({ crew }: KeyCrewProps) => (
   <KeyCrewGrid>
