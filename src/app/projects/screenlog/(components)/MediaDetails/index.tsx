@@ -17,7 +17,7 @@ import RatingScore from "../RatingScore";
 import CastList from "../CastList";
 import KeyCrew from "../KeyCrew";
 import DetailStats from "../DetailStats";
-import Recommendations from "../Recommendations";
+import MediaCarousel from "../MediaCarousel";
 import {
   ActionsWrapper, BackdropFade, BackdropImage, BackdropWrapper, Certification, HeroSection,
   InfoWrapper, MediaDetailWrapper, MediaTitle, OverviewContent, OverviewRow, PosterImage, RatingCount, SectionTitle,
@@ -144,7 +144,7 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
       }
       {recommendations.length > 0 &&
         <DetailSection title="More like this">
-          <Recommendations items={recommendations} isTVShow={isTVShow} />
+          <MediaCarousel items={recommendations} isTVShow={isTVShow} />
         </DetailSection>
       }
     </MediaDetailWrapper>

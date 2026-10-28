@@ -6,9 +6,14 @@ import { ScreenlogWrapper } from "./style";
 import { useGetGenres, useGetMoviePageData } from "../../(hooks)/useMovies";
 import { useGetTvGenres } from "../../(hooks)/useTVShows";
 import Spinner from "@/shared/components/Spinner";
+import { theme } from "@/shared/theme/theme";
+import TicketIcon from "../../../../../shared/assets/icons/ticketIcon.svg";
+import FlameIcon from "../../../../../shared/assets/icons/flameIcon.svg";
+import TrophyIcon from "../../../../../shared/assets/icons/trophyIcon.svg";
 import { randomRange } from "@/shared/utils/mathUtils";
 import MovieHighlight from "../MovieHighlight";
 import GenreContext from "../../(context)/context";
+import { screenlogRoutes } from "../../(helpers)/routes";
 
 const Screenlog = () => {
   const { latest, popular, topRated, isLoading, isError } = useGetMoviePageData({ enabled: true });
@@ -28,9 +33,30 @@ const Screenlog = () => {
     <GenreContext.Provider value={{ movieGenres, tvGenres }}>
       <ScreenlogWrapper>
         <MovieHighlight data={popular?.results[randomPopMovie]} />
-        <MovieSection title="Latest" data={latest} />
-        <MovieSection title="Popular" data={popular} />
-        <MovieSection title="Top Rated" data={topRated} />
+        <MovieSection
+          title="Latest"
+          badge="In theatres"
+          badgeIcon={<TicketIcon />}
+          badgeColor={theme.colors.screenlog.badge.inTheatres}
+          seeAllHref={screenlogRoutes.list("movies", "now-playing")}
+          data={latest}
+        />
+        <MovieSection
+          title="Popular"
+          badge="Trending now"
+          badgeIcon={<FlameIcon />}
+          badgeColor={theme.colors.screenlog.badge.trending}
+          seeAllHref={screenlogRoutes.list("movies", "popular")}
+          data={popular}
+        />
+        <MovieSection
+          title="Top Rated"
+          badge="All time"
+          badgeIcon={<TrophyIcon />}
+          badgeColor={theme.colors.screenlog.badge.allTime}
+          seeAllHref={screenlogRoutes.list("movies", "top-rated")}
+          data={topRated}
+        />
       </ScreenlogWrapper>
     </GenreContext.Provider>
   )

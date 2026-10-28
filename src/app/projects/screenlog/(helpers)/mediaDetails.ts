@@ -112,7 +112,7 @@ const getKeyCrew = (crew: CrewMember[], creators: Creator[] = []): KeyCrewMember
   return [...people.values()].slice(0, KEY_CREW_LIMIT);
 };
 
-const toMovieCard = (movie: Movie): MediaCardData => ({
+export const toMovieCard = (movie: Movie): MediaCardData => ({
   id: movie.id,
   title: movie.title,
   posterPath: movie.poster_path,

@@ -74,6 +74,11 @@ export const theme = {
       badgeText: "#5a6a8a",
       ratingBg: "rgba(16, 24, 51, 0.85)",
       genreText: "#8892b0",
+      badge: {
+        inTheatres: "#01B4E4",
+        trending: "#ff7a45",
+        allTime: "#f6c90e",
+      },
     },
   },
   spacing: {

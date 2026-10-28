@@ -3,10 +3,10 @@ import { theme } from "@/shared/theme/theme";
 import { contentGutter } from "../../(helpers)/contentGutter";
 
 export const ScreenlogWrapper = styled.div`
-  height: calc(100dvh - (${theme.spacing.xxxlarge} + ${theme.spacing.huge}));
   padding-top: ${theme.spacing.medium};
+  padding-bottom: ${theme.spacing.enormous};
   ${contentGutter};
   display: flex;
   flex-direction: column;
-  gap: ${theme.spacing.medium};
+  gap: ${theme.spacing.xxlarge};
 `;
