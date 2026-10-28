@@ -9,7 +9,15 @@ async function getTvGenres(): Promise<Genre[]> {
 
 const getLatestTvShows = () => tmdbFetch<TvShowList>("/tv/on_the_air");
 
-const getTopRatedTvShows = () => tmdbFetch<TvShowList>("/tv/top_rated");
+// Same issue as movies' top rated, with a lower floor since shows get fewer votes
+export const TOP_RATED_TV_MIN_VOTES = 2000;
+
+const getTopRatedTvShows = (page = 1) =>
+  tmdbFetch<TvShowList>("/discover/tv", {
+    sort_by: "vote_average.desc",
+    "vote_count.gte": TOP_RATED_TV_MIN_VOTES,
+    page,
+  });
 
 const getPopularTvShows = (page = 1) => tmdbFetch<TvShowList>("/tv/popular", { page });
 
