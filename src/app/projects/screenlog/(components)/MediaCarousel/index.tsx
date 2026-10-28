@@ -1,9 +1,7 @@
 import PlusIcon from "../../../../../shared/assets/icons/plusIcon.svg";
 import { theme } from "@/shared/theme/theme";
-import { useGetGenres } from "../../(hooks)/useMovies";
-import { useGetTvGenres } from "../../(hooks)/useTVShows";
+import { useGenreNames } from "../../(hooks)/useGenreNames";
 import { MediaCardData } from "../../(helpers)/mediaDetails";
-import { Genre } from "../../(types)/movies";
 import MediaCard from "../MediaCard";
 import { MEDIA_CARD_POSTER_HEIGHT } from "../MediaCard/style";
 import PagedRow from "../PagedRow";
@@ -15,13 +13,8 @@ interface MediaCarouselProps {
   seeAllHref?: string;
 }
 
-const getFirstGenreName = (genreIds: number[], genres: Genre[]) =>
-  genres.find(({ id }) => id === genreIds[0])?.name;
-
 const MediaCarousel = ({ items, isTVShow, seeAllHref }: MediaCarouselProps) => {
-  const { data: movieGenres = [] } = useGetGenres();
-  const { data: tvGenres = [] } = useGetTvGenres();
-  const genres = isTVShow ? tvGenres : movieGenres;
+  const getGenreNames = useGenreNames(isTVShow);
 
   return (
     <PagedRow
@@ -38,7 +31,7 @@ const MediaCarousel = ({ items, isTVShow, seeAllHref }: MediaCarouselProps) => {
           posterPath={posterPath}
           releaseDate={releaseDate}
           vote={vote}
-          genre={getFirstGenreName(genreIds, genres)}
+          genre={getGenreNames(genreIds)[0]}
         />
       ))}
       {seeAllHref &&

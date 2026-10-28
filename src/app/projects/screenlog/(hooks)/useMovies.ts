@@ -42,7 +42,7 @@ export function useGetMovie(id: number, enabled: boolean = true) {
 export function useGetMoviePageData(options?: { enabled?: boolean }) {
   const results = useQueries({
     queries: [
-      { queryKey: ["movies", "latest"], queryFn: getLatest, enabled: options?.enabled ?? true },
+      { queryKey: ["movies", "latest"], queryFn: () => getLatest(), enabled: options?.enabled ?? true },
       { queryKey: ["movies", "top-rated"], queryFn: () => getTopRated(), enabled: options?.enabled ?? true },
       { queryKey: ["movies", "popular"], queryFn: () => getPopular(), enabled: options?.enabled ?? true },
     ]

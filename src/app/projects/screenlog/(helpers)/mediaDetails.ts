@@ -22,6 +22,8 @@ export interface MediaCardData {
   posterPath: string | null;
   releaseDate: string;
   vote: number;
+  voteCount: number;
+  overview: string;
   genreIds: number[];
   href: string;
 }
@@ -118,16 +120,20 @@ export const toMovieCard = (movie: Movie): MediaCardData => ({
   posterPath: movie.poster_path,
   releaseDate: movie.release_date,
   vote: movie.vote_average,
+  voteCount: movie.vote_count,
+  overview: movie.overview,
   genreIds: movie.genre_ids,
   href: screenlogRoutes.movie(movie.id),
 });
 
-const toTvShowCard = (tvShow: TvShow): MediaCardData => ({
+export const toTvShowCard = (tvShow: TvShow): MediaCardData => ({
   id: tvShow.id,
   title: tvShow.name,
   posterPath: tvShow.poster_path,
   releaseDate: tvShow.first_air_date,
   vote: tvShow.vote_average,
+  voteCount: tvShow.vote_count,
+  overview: tvShow.overview,
   genreIds: tvShow.genre_ids,
   href: screenlogRoutes.tvShow(tvShow.id),
 });

@@ -1,7 +1,12 @@
 const SCREENLOG_ROOT = "/projects/screenlog";
 
 export type ListMediaType = "movies" | "tv-shows";
-export type ListCategory = "popular" | "now-playing" | "top-rated";
+
+export const LIST_CATEGORIES = ["popular", "now-playing", "top-rated", "discover"] as const;
+export type ListCategory = typeof LIST_CATEGORIES[number];
+
+export const isListCategory = (value: string): value is ListCategory =>
+  (LIST_CATEGORIES as readonly string[]).includes(value);
 
 export const screenlogRoutes = {
   home: () => SCREENLOG_ROOT,
