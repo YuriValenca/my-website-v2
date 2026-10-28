@@ -89,6 +89,13 @@ export const InfoWrapper = styled.div`
   }
 `;
 
+export const MediaTitle = styled.h5`
+  font-size: ${theme.fontSize.h5};
+  color: ${theme.colors.text.primary};
+  font-weight: 500;
+  line-height: 1.1;
+`;
+
 export const Tagline = styled.small`
   font-size: ${theme.fontSize.xsm};
   font-style: italic;

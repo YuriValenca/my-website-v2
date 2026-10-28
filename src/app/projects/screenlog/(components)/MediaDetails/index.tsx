@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useRouter } from "next/navigation";
 import Spinner from "@/shared/components/Spinner";
 import Button from "@/shared/components/Button";
 import { theme } from "@/shared/theme/theme";
@@ -10,18 +9,18 @@ import PlayIcon from "../../../../../shared/assets/icons/playIcon.svg";
 import { useGetMovie } from "../../(hooks)/useMovies";
 import { useGetTvShow } from "../../(hooks)/useTVShows";
 import { getMediaSections, getTrailerUrl } from "../../(helpers)/mediaDetails";
-import { screenlogRoutes } from "../../(helpers)/routes";
 import { tmdbImage } from "../../(helpers)/tmdbImage";
 import { TvShowDetails } from "../../(types)/tv-shows";
 import { MovieDetails } from "../../(types)/movies";
-import { Rating, RatingWrapper, Tag, Tags, Title } from "../MovieHighlight/style";
+import GenreTags from "../GenreTags";
+import RatingScore from "../RatingScore";
 import CastList from "../CastList";
 import KeyCrew from "../KeyCrew";
 import DetailStats from "../DetailStats";
 import Recommendations from "../Recommendations";
 import {
   ActionsWrapper, BackdropFade, BackdropImage, BackdropWrapper, Certification, HeroSection,
-  InfoWrapper, MediaDetailWrapper, OverviewContent, PosterImage, RatingCount, SectionTitle,
+  InfoWrapper, MediaDetailWrapper, MediaTitle, OverviewContent, PosterImage, RatingCount, SectionTitle,
   SectionWrapper, Tagline, TextInfo } from "./style";
 
 interface MediaDetailsProps {
@@ -45,7 +44,6 @@ const DetailSection = ({ title, children }: DetailSectionProps) => (
 );
 
 const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
-  const router = useRouter();
   const movieQuery = useGetMovie(id, !isTVShow);
   const tvQuery = useGetTvShow(id, isTVShow);
   const { data, isLoading } = isTVShow ? tvQuery : movieQuery;
@@ -93,28 +91,14 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
           loading="eager"
         />
         <InfoWrapper>
-          <Tags>
-            {data.genres.map(genre => (
-              <Tag
-                key={genre.id}
-                onClick={() => router.push(screenlogRoutes.genre(genre.name))}
-              >
-                {genre.name}
-              </Tag>
-            ))}
-          </Tags>
-          <Title>{mediaTitle}</Title>
+          <GenreTags genres={data.genres} />
+          <MediaTitle>{mediaTitle}</MediaTitle>
           {data.tagline && <Tagline>&ldquo;{data.tagline}&rdquo;</Tagline>}
           <TextInfo>
             {certification && <Certification>{certification}</Certification>}
             {displayTextInfo()}
           </TextInfo>
-          <RatingWrapper>
-            <Rating voteValue={data.vote_average}>
-              {data.vote_average.toFixed(1)}
-            </Rating>
-            /10
-          </RatingWrapper>
+          <RatingScore vote={data.vote_average} />
           {!!data?.vote_count &&
             <RatingCount>
               {'Averaged from ' + data.vote_count + ' users'}

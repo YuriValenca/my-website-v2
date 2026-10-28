@@ -5,7 +5,9 @@ import { useGenres } from "../../(context)/context";
 import { Movie } from "../../(types)/movies";
 import Button from "@/shared/components/Button";
 import RandomizeIcon from "../../../../../shared/assets/icons/randomizeIcon.svg";
-import { ButtonsWrapper, DetailsWrapper, ExtraInfo, HighlightPoster, MovieHighlightWrapper, Overview, RatingWrapper, Rating, Tag, Tags, Title, TopRow } from "./style";
+import GenreTags from "../GenreTags";
+import RatingScore from "../RatingScore";
+import { ButtonsWrapper, DetailsWrapper, ExtraInfo, HighlightPoster, MovieHighlightWrapper, Overview, Title, TopRow } from "./style";
 import { theme } from "@/shared/theme/theme";
 import { getSurpriseMovie } from "../../(helpers)/getSurpriseMovie";
 import { screenlogRoutes } from "../../(helpers)/routes";
@@ -69,24 +71,10 @@ const MovieHighlight = ({ data }: MovieHighlightProps) => {
           onClick={() => goToMovie(data?.id)}
         />
         <DetailsWrapper>
-          <Tags>
-            {displayGenres.map(genre => (
-              <Tag
-                key={genre.id}
-                onClick={() => router.push(screenlogRoutes.genre(genre.name))}
-              >
-                {genre.name}
-              </Tag>
-            ))}
-          </Tags>
+          <GenreTags genres={displayGenres} />
           <Title>{data?.title}</Title>
           <ExtraInfo>{formatDate(data?.release_date, 'yearOnly')}</ExtraInfo>
-          <RatingWrapper>
-            <Rating voteValue={data?.vote_average}>
-              {data?.vote_average.toFixed(1)}
-            </Rating>
-            /10
-          </RatingWrapper>
+          <RatingScore vote={data?.vote_average} />
           {!isMobile && overviewAndButtons}
         </DetailsWrapper>
       </TopRow>
