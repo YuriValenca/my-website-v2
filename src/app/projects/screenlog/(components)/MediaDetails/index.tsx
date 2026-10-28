@@ -11,6 +11,7 @@ import { useGetMovie } from "../../(hooks)/useMovies";
 import { useGetTvShow } from "../../(hooks)/useTVShows";
 import { getMediaSections, getTrailerUrl } from "../../(helpers)/mediaDetails";
 import { screenlogRoutes } from "../../(helpers)/routes";
+import { tmdbImage } from "../../(helpers)/tmdbImage";
 import { TvShowDetails } from "../../(types)/tv-shows";
 import { MovieDetails } from "../../(types)/movies";
 import { Rating, RatingWrapper, Tag, Tags, Title } from "../MovieHighlight/style";
@@ -80,7 +81,7 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
     <MediaDetailWrapper>
       <BackdropWrapper>
         {data?.backdrop_path ? <BackdropImage
-          src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`}
+          src={tmdbImage(data.backdrop_path, "original")}
         /> : null}
         <BackdropFade />
       </BackdropWrapper>

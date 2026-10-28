@@ -1,65 +1,29 @@
 import { Genre, MovieDetails, MovieList } from "../(types)/movies";
-
-const BASE_URL = "https://api.themoviedb.org/3";
-
-const headers = {
-  Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_TOKEN}`,
-  "Content-type": "application/json",
-}
+import { tmdbFetch } from "./tmdbClient";
 
 async function getGenres(): Promise<Genre[]> {
-  const res = await fetch (`${BASE_URL}/genre/movie/list`, { headers })
-
-  if (!res.ok) throw new Error (`Failed to fetch movie genres: ${res.status}`)
-
-  return res.json().then((data) => data.genres);
+  const data = await tmdbFetch<{ genres: Genre[] }>("/genre/movie/list");
+  return data.genres;
 }
 
-async function getLatest(): Promise<MovieList> {
-  const res = await fetch(`${BASE_URL}/movie/now_playing`, { headers })
+const getLatest = () => tmdbFetch<MovieList>("/movie/now_playing");
 
-  if (!res.ok) throw new Error (`Failed to fetch latest movies: ${res.status}`)
+const getTopRated = () => tmdbFetch<MovieList>("/movie/top_rated");
 
-  return res.json() as Promise<MovieList>;
-}
+const getPopular = (page = 1) => tmdbFetch<MovieList>("/movie/popular", { page });
 
-async function getTopRated(): Promise<MovieList> {
-  const res = await fetch(`${BASE_URL}/movie/top_rated`, { headers })
+const getMovie = (id: number) =>
+  tmdbFetch<MovieDetails>(`/movie/${id}`, {
+    append_to_response: "credits,videos,recommendations,release_dates",
+  });
 
-  if (!res.ok) throw new Error (`Failed to fetch top rated movies: ${res.status}`)
-
-  return res.json() as Promise<MovieList>;
-}
-
-async function getPopular(page?: number): Promise<MovieList> {
-  const res = await fetch(`${BASE_URL}/movie/popular${page ? `?page=${page}` : ''}`, { headers })
-
-  if (!res.ok) throw new Error (`Failed to fetch popular movies: ${res.status}`)  
-
-  return res.json() as Promise<MovieList>;
-}
-
-async function getMovie(id: number): Promise<MovieDetails> {
-  const res = await fetch (
-    `${BASE_URL}/movie/${id}?append_to_response=credits,videos,recommendations,release_dates`,
-    { headers }
-  )
-
-  if (!res.ok) throw new Error(`Failed to fetch movie: ${res.status}`);
-
-  return res.json() as Promise<MovieDetails>;
-}
-
-async function discoverMovies(minVoteCount: number, page = 1): Promise<MovieList> {
-  const res = await fetch(
-    `${BASE_URL}/discover/movie?include_adult=false&sort_by=popularity.desc&vote_count.gte=${minVoteCount}&page=${page}`,
-    { headers }
-  );
-
-  if (!res.ok) throw new Error(`Failed to discover movies: ${res.status}`);
-
-  return res.json() as Promise<MovieList>;
-}
+const discoverMovies = (minVoteCount: number, page = 1) =>
+  tmdbFetch<MovieList>("/discover/movie", {
+    include_adult: false,
+    sort_by: "popularity.desc",
+    "vote_count.gte": minVoteCount,
+    page,
+  });
 
 export {
   getGenres,
