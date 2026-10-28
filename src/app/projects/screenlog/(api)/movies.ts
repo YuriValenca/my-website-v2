@@ -8,7 +8,16 @@ async function getGenres(): Promise<Genre[]> {
 
 const getLatest = () => tmdbFetch<MovieList>("/movie/now_playing");
 
-const getTopRated = () => tmdbFetch<MovieList>("/movie/top_rated");
+// /movie/top_rated lets new releases with a few hundred votes outrank classics, so the vote floor is set here
+const TOP_RATED_MIN_VOTES = 5000;
+
+const getTopRated = (page = 1) =>
+  tmdbFetch<MovieList>("/discover/movie", {
+    include_adult: false,
+    sort_by: "vote_average.desc",
+    "vote_count.gte": TOP_RATED_MIN_VOTES,
+    page,
+  });
 
 const getPopular = (page = 1) => tmdbFetch<MovieList>("/movie/popular", { page });
 
