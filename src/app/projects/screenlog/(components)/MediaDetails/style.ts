@@ -9,7 +9,7 @@ export const MediaDetailWrapper = styled.div`
   padding-bottom: ${theme.spacing.enormous};
 
   > *:not(:first-of-type) {
-    margin-bottom: ${theme.spacing.large};
+    margin-bottom: ${theme.spacing.medium};
     ${contentGutter};
   }
 
