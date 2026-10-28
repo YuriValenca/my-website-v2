@@ -9,7 +9,7 @@ export const Tags = styled.div`
 
 export const Tag = styled.button`
   font-family: ${theme.fontFamily.noto};
-  font-size: ${theme.fontSize.tooltip};
+  font-size: ${theme.fontSize.xsm};
   text-transform: uppercase;
   background-color: transparent;
   padding: ${theme.spacing.micro};

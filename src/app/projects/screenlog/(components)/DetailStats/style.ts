@@ -16,7 +16,7 @@ export const StatCard = styled.div`
 `;
 
 export const StatLabel = styled.p`
-  font-size: ${theme.fontSize.tooltip};
+  font-size: ${theme.fontSize.xsm};
   letter-spacing: 1px;
   text-transform: uppercase;
   color: ${theme.colors.text.placeholder};

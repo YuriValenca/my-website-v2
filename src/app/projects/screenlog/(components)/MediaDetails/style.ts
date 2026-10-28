@@ -58,8 +58,8 @@ export const HeroSection = styled.div`
 `;
 
 export const PosterImage = styled(TmdbImage)`
-  width: 160px;
-  height: 240px;
+  width: 220px;
+  height: 330px;
   object-fit: cover;
   border-radius: ${theme.borderRadius.medium};
   border: 2px solid ${theme.colors.border.default};
@@ -84,15 +84,20 @@ export const InfoWrapper = styled.div`
   }
 `;
 
-export const MediaTitle = styled.h5`
-  font-size: ${theme.fontSize.h5};
+export const MediaTitle = styled.h1`
+  font-family: ${theme.fontFamily.playfair};
+  font-size: ${theme.fontSize.h1};
+  font-weight: normal;
   color: ${theme.colors.text.primary};
-  font-weight: 500;
   line-height: 1.1;
+
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    font-size: ${theme.fontSize.h4};
+  }
 `;
 
 export const Tagline = styled.small`
-  font-size: ${theme.fontSize.xsm};
+  font-size: ${theme.fontSize.md};
   font-style: italic;
   color: ${theme.colors.text.secondary};
   line-height: 1.1;
@@ -103,7 +108,7 @@ export const TextInfo = styled.div`
   flex-wrap: wrap;
   align-items: center;
   gap: ${theme.spacing.xsmall};
-  font-size: ${theme.fontSize.xsm};
+  font-size: ${theme.fontSize.md};
   color: ${theme.colors.text.secondary};
   line-height: 1.25;
 `;
@@ -112,7 +117,7 @@ export const Certification = styled.span`
   padding: 0 ${theme.spacing.micro};
   border: 1.5px solid ${theme.colors.text.secondary};
   border-radius: 3px;
-  font-size: ${theme.fontSize.tooltip};
+  font-size: ${theme.fontSize.xsm};
   font-weight: bold;
   letter-spacing: 0.5px;
   color: ${theme.colors.text.primary};
@@ -156,7 +161,8 @@ export const SectionWrapper = styled.div`
 `;
 
 export const OverviewContent = styled.p`
-  font-size: ${theme.fontSize.md};
+  font-size: ${theme.fontSize.normal};
+  line-height: 1.6;
   color: ${theme.colors.text.secondary};
   text-transform: none;
   letter-spacing: normal;

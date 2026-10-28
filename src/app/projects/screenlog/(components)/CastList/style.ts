@@ -44,7 +44,7 @@ export const CastMemberName = styled.p`
 `;
 
 export const CastMemberCharacter = styled.p`
-  font-size: ${theme.fontSize.tooltip};
+  font-size: ${theme.fontSize.xsm};
   color: ${theme.colors.text.placeholder};
   line-height: 1.3;
 `;
