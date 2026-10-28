@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { theme } from "@/shared/theme/theme";
+import { contentGutter } from "../../(helpers)/contentGutter";
 import TmdbImage from "../TmdbImage";
 
 export const MediaDetailWrapper = styled.div`
@@ -9,17 +10,11 @@ export const MediaDetailWrapper = styled.div`
 
   > *:not(:first-of-type) {
     margin-bottom: ${theme.spacing.large};
-    padding: ${theme.spacing.none} 10%;
+    ${contentGutter};
   }
 
   @media (max-width: ${theme.breakpoints.xl}) {
     padding-bottom: ${theme.spacing.xxlarge};
-  }
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    > *:not(:first-of-type) {
-      padding: ${theme.spacing.none} 6%;
-    }
   }
 `;
 

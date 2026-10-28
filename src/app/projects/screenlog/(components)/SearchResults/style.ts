@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
 import { theme } from "@/shared/theme/theme";
+import { contentGutter } from "../../(helpers)/contentGutter";
 
 export const SearchResultsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: ${theme.spacing.medium};
-  padding: ${theme.spacing.none} 10% ${theme.spacing[100]};
+  padding-bottom: ${theme.spacing[100]};
+  ${contentGutter};
   gap: ${theme.spacing.xxlarge};
 
   @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.none} 6% ${theme.spacing[100]};
     flex-direction: column;
   }
 `;

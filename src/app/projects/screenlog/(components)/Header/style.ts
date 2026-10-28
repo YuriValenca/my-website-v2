@@ -1,4 +1,5 @@
 import { theme } from "@/shared/theme/theme";
+import { contentGutter } from "../../(helpers)/contentGutter";
 import styled from "@emotion/styled";
 
 export const HeaderWrapper = styled.header`
@@ -8,7 +9,7 @@ export const HeaderWrapper = styled.header`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: ${theme.spacing.none} 10%;
+  ${contentGutter};
   background-color: ${theme.colors.background.surface};
   height: ${theme.spacing.huge};
 
@@ -21,10 +22,6 @@ export const HeaderWrapper = styled.header`
 
   @media (max-width: ${theme.breakpoints.lg}) {
     height: ${theme.spacing.xxxlarge};
-  }
-
-  @media (max-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.none} 6%;
   }
 
   @media (max-width: ${theme.breakpoints.tablet}) {
