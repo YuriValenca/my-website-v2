@@ -3,7 +3,7 @@ import { theme } from "@/shared/theme/theme";
 
 export const StatsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: ${theme.spacing.xsmall};
 `;
 

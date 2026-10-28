@@ -20,7 +20,7 @@ import DetailStats from "../DetailStats";
 import Recommendations from "../Recommendations";
 import {
   ActionsWrapper, BackdropFade, BackdropImage, BackdropWrapper, Certification, HeroSection,
-  InfoWrapper, MediaDetailWrapper, MediaTitle, OverviewContent, PosterImage, RatingCount, SectionTitle,
+  InfoWrapper, MediaDetailWrapper, MediaTitle, OverviewContent, OverviewRow, PosterImage, RatingCount, SectionTitle,
   SectionWrapper, Tagline, TextInfo } from "./style";
 
 interface MediaDetailsProps {
@@ -74,6 +74,7 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
 
   const { certification, stats, keyCrew, recommendations } = getMediaSections(data, isTVShow);
   const trailerUrl = getTrailerUrl(data.videos);
+  const hasStats = stats.length >= MIN_STATS_TO_SHOW;
 
   return (
     <MediaDetailWrapper>
@@ -117,15 +118,19 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
           }
         </InfoWrapper>
       </HeroSection>
-      {data.overview &&
-        <DetailSection title="Overview">
-          <OverviewContent>{data.overview}</OverviewContent>
-        </DetailSection>
-      }
-      {stats.length >= MIN_STATS_TO_SHOW &&
-        <DetailSection title="Details">
-          <DetailStats stats={stats} />
-        </DetailSection>
+      {(data.overview || hasStats) &&
+        <OverviewRow>
+          {data.overview &&
+            <DetailSection title="Overview">
+              <OverviewContent>{data.overview}</OverviewContent>
+            </DetailSection>
+          }
+          {hasStats &&
+            <DetailSection title="Details">
+              <DetailStats stats={stats} />
+            </DetailSection>
+          }
+        </OverviewRow>
       }
       {data.credits.cast.length > 0 &&
         <DetailSection title="Cast">

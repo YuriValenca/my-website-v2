@@ -160,6 +160,27 @@ export const SectionWrapper = styled.div`
   }
 `;
 
+// A lone section fills the row, since it is both the first and the last child
+export const OverviewRow = styled.div`
+  display: flex;
+  gap: ${theme.spacing.xxlarge};
+
+  > :first-of-type {
+    flex: 3;
+    min-width: 0;
+  }
+
+  > :last-of-type {
+    flex: 2;
+    min-width: 0;
+  }
+
+  @media (max-width: ${theme.breakpoints.lg}) {
+    flex-direction: column;
+    gap: ${theme.spacing.large};
+  }
+`;
+
 export const OverviewContent = styled.p`
   font-size: ${theme.fontSize.normal};
   line-height: 1.6;
