@@ -1,13 +1,15 @@
 import { theme } from "@/shared/theme/theme";
 import styled from "@emotion/styled";
 
+export const FOOTER_HEIGHT = "48px";
+
 export const FooterWrapper = styled.footer`
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  height: 48px;
+  height: ${FOOTER_HEIGHT};
   background-color: ${theme.colors.background.surface};
   border-top: 1px solid ${theme.colors.border.default};
   display: flex;
