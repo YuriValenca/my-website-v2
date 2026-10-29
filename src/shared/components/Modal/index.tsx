@@ -49,7 +49,7 @@ const Modal = ({
         onClick={(e) => e.stopPropagation()}
       >
         {title && <ModalTitle>{title}</ModalTitle>}
-        <ModalContent>{children}</ModalContent>
+        <ModalContent isDrawer={position === "left" || position === "right"}>{children}</ModalContent>
       </ModalContainer>
     </ModalOverlay>
   );

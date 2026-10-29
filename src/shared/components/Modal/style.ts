@@ -100,12 +100,16 @@ export const ModalContainer = styled.div<{ position: string; isClosing: boolean 
     top: 0;
     right: 0;
     height: 100%;
+    max-height: none;
+    border-radius: ${theme.borderRadius.medium} 0 0 ${theme.borderRadius.medium};
   `}
 
   ${({ position }) => position === "left" && `
     top: 0;
     left: 0;
     height: 100%;
+    max-height: none;
+    border-radius: 0 ${theme.borderRadius.medium} ${theme.borderRadius.medium} 0;
   `}
 
   ${({ position }) => position === "bottom" && `
@@ -126,6 +130,13 @@ export const ModalTitle = styled.h4`
   text-align: center;
 `;
 
-export const ModalContent = styled.div`
+// Side drawers take the full height, so their content scrolls instead of the drawer growing
+export const ModalContent = styled.div<{ isDrawer: boolean }>`
   margin-top: ${theme.spacing.xsmall};
+
+  ${({ isDrawer }) => isDrawer && `
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  `}
 `;
