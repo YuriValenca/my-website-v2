@@ -53,6 +53,7 @@ export const theme = {
       yellow: "#f6c90e",
       red: "#CC2C21",
       blue: "#01B4E4",
+      blueSoft: "rgba(1, 180, 228, 0.14)",
     },
     neutral: {
       white: "#ffffff",
