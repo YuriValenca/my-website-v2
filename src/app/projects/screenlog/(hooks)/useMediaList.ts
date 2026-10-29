@@ -3,9 +3,9 @@
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { discoverMoviePage, discoverTvShowPage } from "../(api)/discover";
 import { TMDB_MAX_PAGES, TMDB_TOTAL_RESULTS_CAP } from "../(api)/tmdbClient";
-import { DiscoverFilters, getCategoryFilters } from "../(helpers)/discoverFilters";
+import { DiscoverFilters } from "../(helpers)/discoverFilters";
 import { MediaCardData, toMovieCard, toTvShowCard } from "../(helpers)/mediaDetails";
-import { ListCategory, ListMediaType } from "../(helpers)/routes";
+import { ListMediaType } from "../(helpers)/routes";
 
 interface MediaListPage {
   items: MediaCardData[];
@@ -46,9 +46,7 @@ export const flattenUniqueItems = (data: InfiniteData<MediaListPage> | undefined
   return [...itemsById.values()];
 };
 
-export function useMediaList(mediaType: ListMediaType, category: ListCategory) {
-  const filters = getCategoryFilters(mediaType, category);
-
+export function useMediaList(mediaType: ListMediaType, filters: DiscoverFilters) {
   return useInfiniteQuery({
     queryKey: ["media-list", mediaType, filters],
     queryFn: ({ pageParam }) => fetchMediaListPage(mediaType, filters, pageParam),

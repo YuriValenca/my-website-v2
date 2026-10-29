@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { theme } from "@/shared/theme/theme";
+import { FOOTER_HEIGHT } from "@/shared/components/Footer/style";
 import { contentGutter } from "../../(helpers)/contentGutter";
 import { canHover } from "../../(helpers)/interactions";
 import { MEDIA_CARD_WIDTH } from "../MediaCard/style";
@@ -84,6 +85,61 @@ export const ViewOption = styled.button<{ isActive: boolean }>`
   font-size: ${theme.fontSize.md};
   color: ${({ isActive }) => (isActive ? theme.colors.text.primary : theme.colors.text.secondary)};
   cursor: pointer;
+`;
+
+export const ToolbarActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.xsmall};
+`;
+
+export const FiltersButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.xsmall};
+  padding: ${theme.spacing.micro} ${theme.spacing.small};
+  border: 1px solid ${theme.colors.border.default};
+  border-radius: ${theme.borderRadius.medium};
+  background: none;
+  font-family: ${theme.fontFamily.noto};
+  font-size: ${theme.fontSize.md};
+  color: ${theme.colors.text.primary};
+  cursor: pointer;
+
+  svg {
+    width: ${theme.spacing.default};
+    height: ${theme.spacing.default};
+  }
+`;
+
+export const ListBody = styled.div`
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: start;
+  gap: ${theme.spacing.xxlarge};
+
+  @media (max-width: ${theme.breakpoints.lg}) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+`;
+
+// Sticky with its own scroll, so the Search button stays reachable while the results scroll.
+// Its height leaves room for the fixed footer, which would otherwise cover the bottom of it
+export const FiltersSidebar = styled.aside`
+  position: sticky;
+  top: ${theme.spacing.medium};
+  max-height: calc(100dvh - ${FOOTER_HEIGHT} - 2 * ${theme.spacing.medium});
+  overflow-y: auto;
+  padding-right: ${theme.spacing.xsmall};
+  scrollbar-width: thin;
+  scrollbar-color: ${theme.colors.border.default} transparent;
+`;
+
+export const ResultsColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.medium};
+  min-width: 0;
 `;
 
 export const MediaGrid = styled.div`

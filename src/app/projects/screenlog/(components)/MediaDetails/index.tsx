@@ -92,7 +92,7 @@ const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
           loading="eager"
         />
         <InfoWrapper>
-          <GenreTags genres={data.genres} />
+          <GenreTags genres={data.genres} mediaType={isTVShow ? "tv-shows" : "movies"} />
           <MediaTitle>{mediaTitle}</MediaTitle>
           {data.tagline && <Tagline>&ldquo;{data.tagline}&rdquo;</Tagline>}
           <TextInfo>

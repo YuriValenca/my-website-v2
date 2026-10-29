@@ -71,7 +71,7 @@ const MovieHighlight = ({ data }: MovieHighlightProps) => {
           onClick={() => goToMovie(data?.id)}
         />
         <DetailsWrapper>
-          <GenreTags genres={displayGenres} />
+          <GenreTags genres={displayGenres} mediaType="movies" />
           <Title>{data?.title}</Title>
           <ExtraInfo>{formatDate(data?.release_date, 'yearOnly')}</ExtraInfo>
           <RatingScore vote={data?.vote_average} />
