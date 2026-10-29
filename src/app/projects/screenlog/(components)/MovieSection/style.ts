@@ -10,7 +10,7 @@ export const SectionWrapper = styled.section`
 export const SectionHeader = styled.div`
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.small};
+  gap: ${theme.spacing.default};
 `;
 
 export const SectionTitle = styled.h2`
@@ -24,7 +24,7 @@ export const SectionBadge = styled.span<{ color: string }>`
   display: flex;
   align-items: center;
   gap: ${theme.spacing.xsmall};
-  padding: ${theme.spacing.micro} ${theme.spacing.small};
+  padding: ${theme.spacing.micro} ${theme.spacing.xsmall};
   border: 1px solid ${({ color }) => color};
   border-radius: ${theme.borderRadius.small};
   font-size: ${theme.fontSize.sm};

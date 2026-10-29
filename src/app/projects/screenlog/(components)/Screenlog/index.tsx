@@ -34,14 +34,6 @@ const Screenlog = () => {
       <ScreenlogWrapper>
         <MovieHighlight data={popular?.results[randomPopMovie]} />
         <MovieSection
-          title="Latest"
-          badge="In theatres"
-          badgeIcon={<TicketIcon />}
-          badgeColor={theme.colors.screenlog.badge.inTheatres}
-          seeAllHref={screenlogRoutes.list("movies", "now-playing")}
-          data={latest}
-        />
-        <MovieSection
           title="Popular"
           badge="Trending now"
           badgeIcon={<FlameIcon />}
@@ -50,7 +42,15 @@ const Screenlog = () => {
           data={popular}
         />
         <MovieSection
-          title="Top Rated"
+          title="Now playing"
+          badge="In theatres"
+          badgeIcon={<TicketIcon />}
+          badgeColor={theme.colors.screenlog.badge.inTheatres}
+          seeAllHref={screenlogRoutes.list("movies", "now-playing")}
+          data={latest}
+        />
+        <MovieSection
+          title="Top rated"
           badge="All time"
           badgeIcon={<TrophyIcon />}
           badgeColor={theme.colors.screenlog.badge.allTime}
