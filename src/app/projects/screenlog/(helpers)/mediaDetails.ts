@@ -76,8 +76,8 @@ const getMovieStats = (movie: MovieDetails): DetailStat[] => [
 ].filter(isStat);
 
 const getTvShowStats = (tvShow: TvShowDetails): DetailStat[] => [
-  buildStat("Network", tvShow.networks[0]?.name),
   buildStat("First aired", formatDate(tvShow.first_air_date, "long")),
+  buildStat("Network", tvShow.networks[0]?.name),
   getEpisodeStat(tvShow),
   buildStat("Original language", getLanguageName(tvShow.original_language)),
 ].filter(isStat);
