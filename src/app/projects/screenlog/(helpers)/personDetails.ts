@@ -8,8 +8,9 @@ interface CreditEntry {
   department: string;
 }
 
-interface PersonCredit extends MediaCardData {
+export interface PersonCredit extends MediaCardData {
   mediaType: MediaCredit["media_type"];
+  posterLabel: string;
   roles: string[];
   departments: string[];
 }
@@ -75,7 +76,13 @@ const mergeByTitle = (entries: CreditEntry[]) => {
 
   entries.forEach(({ credit, role, department }) => {
     const card = toCard(credit);
-    const title = titles.get(card.href) ?? { ...card, mediaType: credit.media_type, roles: [], departments: [] };
+    const title = titles.get(card.href) ?? {
+      ...card,
+      mediaType: credit.media_type,
+      posterLabel: MEDIA_TYPE_LABELS[credit.media_type],
+      roles: [],
+      departments: [],
+    };
 
     if (role && !title.roles.includes(role)) title.roles.push(role);
     if (!title.departments.includes(department)) title.departments.push(department);
@@ -105,13 +112,34 @@ const getActingCredits = (cast: CastCredit[]) =>
     department: ACTING_DEPARTMENT,
   })));
 
-const getCrewCredits = (crew: CrewCredit[]) =>
-  mergeByTitle(
-    crew
-      .filter(({ job }) => !TRIBUTE_JOBS.includes(job))
-      .sort((a, b) => getJobRank(a) - getJobRank(b))
-      .map((credit) => ({ credit, role: credit.job, department: credit.department })),
-  );
+const getCrewEntries = (crew: CrewCredit[]): CreditEntry[] =>
+  crew
+    .filter(({ job }) => !TRIBUTE_JOBS.includes(job))
+    .sort((a, b) => getJobRank(a) - getJobRank(b))
+    .map((credit) => ({ credit, role: credit.job, department: credit.department }));
+
+const getFilmography = (department: string, { cast, crew }: PersonProfile["combined_credits"]) => {
+  const actingCredits = department === ACTING_DEPARTMENT ? preferMatching(cast, isActingRole) : cast.filter(isActingRole);
+  const actingEntries = actingCredits.map((credit) => ({
+    credit,
+    role: credit.character && `as ${credit.character}`,
+    department: ACTING_DEPARTMENT,
+  }));
+
+  return mergeByTitle([...actingEntries, ...getCrewEntries(crew)])
+    .sort((a, b) => (b.releaseDate ?? "").localeCompare(a.releaseDate ?? ""));
+};
+
+export const getCreditDepartments = (credits: PersonCredit[], mainDepartment: string) => {
+  const titleCounts = new Map<string, number>();
+
+  credits.flatMap(({ departments }) => departments).forEach((department) => {
+    titleCounts.set(department, (titleCounts.get(department) ?? 0) + 1);
+  });
+
+  return [...titleCounts.keys()].sort((a, b) =>
+    Number(b === mainDepartment) - Number(a === mainDepartment) || titleCounts.get(b)! - titleCounts.get(a)!);
+};
 
 const countByMediaType = (credits: PersonCredit[], mediaType: PersonCredit["mediaType"]) =>
   String(credits.filter((credit) => credit.mediaType === mediaType).length);
@@ -136,23 +164,22 @@ const getKnownFor = (credits: PersonCredit[]): MediaCardData[] =>
   [...credits]
     .sort((a, b) => b.voteCount - a.voteCount)
     .slice(0, KNOWN_FOR_LIMIT)
-    .map((credit) => ({
-      ...credit,
-      posterLabel: MEDIA_TYPE_LABELS[credit.mediaType],
-      caption: credit.roles.join(", "),
-    }));
+    .map((credit) => ({ ...credit, caption: credit.roles.join(", ") }));
 
 export const getPersonSections = ({ known_for_department: department, combined_credits }: PersonProfile) => {
+  const filmography = getFilmography(department, combined_credits);
+
   if (department === ACTING_DEPARTMENT) {
     const credits = getActingCredits(combined_credits.cast);
-    return { stats: getCareerStats(credits), knownFor: getKnownFor(credits) };
+    return { stats: getCareerStats(credits), knownFor: getKnownFor(credits), filmography };
   }
 
-  const credits = getCrewCredits(combined_credits.crew);
+  const credits = mergeByTitle(getCrewEntries(combined_credits.crew));
   const mainCredits = preferMatching(credits, ({ departments }) => departments.includes(department));
 
   return {
     stats: CREATIVE_DEPARTMENTS.includes(department) ? getCreativeStats(credits) : getCareerStats(mainCredits),
     knownFor: getKnownFor(mainCredits),
+    filmography,
   };
 };

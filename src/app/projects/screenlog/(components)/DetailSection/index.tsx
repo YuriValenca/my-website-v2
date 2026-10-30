@@ -1,14 +1,18 @@
 import { ReactNode } from "react";
-import { SectionTitle, SectionWrapper } from "./style";
+import { SectionHeader, SectionTitle, SectionWrapper } from "./style";
 
 interface DetailSectionProps {
   title: string;
+  actions?: ReactNode;
   children: ReactNode;
 }
 
-const DetailSection = ({ title, children }: DetailSectionProps) => (
+const DetailSection = ({ title, actions, children }: DetailSectionProps) => (
   <SectionWrapper>
-    <SectionTitle>{title}</SectionTitle>
+    <SectionHeader>
+      <SectionTitle>{title}</SectionTitle>
+      {actions}
+    </SectionHeader>
     <hr />
     {children}
   </SectionWrapper>

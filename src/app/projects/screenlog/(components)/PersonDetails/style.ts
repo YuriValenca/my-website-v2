@@ -22,6 +22,10 @@ export const PersonHero = styled.section`
   align-items: flex-start;
   gap: ${theme.spacing.xxlarge};
 
+  @media (max-width: ${theme.breakpoints.lg}) {
+    justify-content: center;
+  }
+
   @media (max-width: ${theme.breakpoints.tablet}) {
     gap: ${theme.spacing.medium};
   }

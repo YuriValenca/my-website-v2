@@ -7,6 +7,7 @@ import DetailSection from "../DetailSection";
 import DetailStats from "../DetailStats";
 import MediaCarousel from "../MediaCarousel";
 import PersonBiography from "./PersonBiography";
+import PersonFilmography from "./PersonFilmography";
 import {
   LifeSummary, PersonHero, PersonInfo, PersonName, PersonPhoto, PersonRole, PersonStats, PersonWrapper,
 } from "./style";
@@ -23,7 +24,7 @@ const PersonDetails = ({ id }: PersonDetailsProps) => {
   if (isLoading) return <Spinner />;
   if (!data) return null;
 
-  const { stats, knownFor } = getPersonSections(data);
+  const { stats, knownFor, filmography } = getPersonSections(data);
   const lifeSummary = getLifeSummary(data);
 
   return (
@@ -46,6 +47,9 @@ const PersonDetails = ({ id }: PersonDetailsProps) => {
         <DetailSection title="Known for">
           <MediaCarousel items={knownFor} />
         </DetailSection>
+      }
+      {filmography.length > 0 &&
+        <PersonFilmography credits={filmography} mainDepartment={data.known_for_department} />
       }
     </PersonWrapper>
   );
