@@ -145,21 +145,6 @@ export const RatingCount = styled.p`
   line-height: 1.25;
 `;
 
-export const SectionTitle = styled.p`
-  font-family: ${theme.fontFamily.noto};
-  font-size: ${theme.fontSize.xsm};
-  text-transform: uppercase;
-  color: ${theme.colors.text.placeholder};
-  letter-spacing: ${theme.spacing.nano};
-`;
-
-export const SectionWrapper = styled.div`
-  hr {
-    margin: ${theme.spacing.xsmall} ${theme.spacing.none};
-    color: ${theme.colors.border.default};
-  }
-`;
-
 // A lone section fills the row, since it is both the first and the last child
 export const OverviewRow = styled.div`
   display: flex;

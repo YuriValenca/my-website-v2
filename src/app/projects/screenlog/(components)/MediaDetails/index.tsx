@@ -1,6 +1,5 @@
 "use client";
 
-import { ReactNode } from "react";
 import Spinner from "@/shared/components/Spinner";
 import Button from "@/shared/components/Button";
 import { theme } from "@/shared/theme/theme";
@@ -16,32 +15,20 @@ import GenreTags from "../GenreTags";
 import RatingScore from "../RatingScore";
 import CastList from "../CastList";
 import KeyCrew from "../KeyCrew";
+import DetailSection from "../DetailSection";
 import DetailStats from "../DetailStats";
 import MediaCarousel from "../MediaCarousel";
 import {
   ActionsWrapper, BackdropFade, BackdropImage, BackdropWrapper, Certification, HeroSection,
-  InfoWrapper, MediaDetailWrapper, MediaTitle, OverviewContent, OverviewRow, PosterImage, RatingCount, SectionTitle,
-  SectionWrapper, Tagline, TextInfo } from "./style";
+  InfoWrapper, MediaDetailWrapper, MediaTitle, OverviewContent, OverviewRow, PosterImage, RatingCount,
+  Tagline, TextInfo } from "./style";
 
 interface MediaDetailsProps {
   id: number;
   isTVShow?: boolean;
 }
 
-interface DetailSectionProps {
-  title: string;
-  children: ReactNode;
-}
-
 const MIN_STATS_TO_SHOW = 2;
-
-const DetailSection = ({ title, children }: DetailSectionProps) => (
-  <SectionWrapper>
-    <SectionTitle>{title}</SectionTitle>
-    <hr />
-    {children}
-  </SectionWrapper>
-);
 
 const MediaDetails = ({ id, isTVShow = false }: MediaDetailsProps) => {
   const movieQuery = useGetMovie(id, !isTVShow);
