@@ -27,6 +27,21 @@ export const RowWrapper = styled(Link)`
     gap: ${theme.spacing.small};
     padding: ${theme.spacing.xsmall} ${theme.spacing.none};
   }
+
+  &[data-has-year="true"] {
+    grid-template-columns: ${theme.spacing.enormous} 80px 1fr;
+
+    @media (max-width: ${theme.breakpoints.tablet}) {
+      grid-template-columns: ${theme.spacing.xxxlarge} 64px 1fr;
+    }
+  }
+`;
+
+export const RowYear = styled.span`
+  font-family: ${theme.fontFamily.playfair};
+  font-size: ${theme.fontSize.h5};
+  color: ${theme.colors.text.secondary};
+  text-align: center;
 `;
 
 export const Rank = styled.span`
@@ -56,10 +71,22 @@ export const RowInfo = styled.div`
   min-width: 0;
 `;
 
+export const RowHeading = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: ${theme.spacing.micro} ${theme.spacing.xsmall};
+`;
+
 export const RowTitle = styled.p`
   font-size: ${theme.fontSize.normal};
   font-weight: 500;
   color: ${theme.colors.text.primary};
+`;
+
+export const RowRole = styled.p`
+  font-size: ${theme.fontSize.md};
+  color: ${theme.colors.accent.blue};
 `;
 
 export const RowMeta = styled.p`

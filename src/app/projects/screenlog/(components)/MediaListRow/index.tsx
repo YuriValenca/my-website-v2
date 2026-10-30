@@ -1,25 +1,29 @@
-import { formatDate } from "@/shared/utils/stringUtils";
 import { MediaCardData } from "../../(helpers)/mediaDetails";
 import {
-  Rank, RatingValue, RowInfo, RowMeta, RowOverview, RowPoster, RowRating, RowTitle, RowWrapper,
+  Rank, RatingValue, RowHeading, RowInfo, RowMeta, RowOverview, RowPoster, RowRating, RowRole, RowTitle, RowWrapper,
+  RowYear,
 } from "./style";
 
 interface MediaListRowProps {
-  rank: number;
+  rank?: number;
+  year?: string;
   item: MediaCardData;
-  genres: string[];
+  meta: string;
+  role?: string;
 }
 
-const MediaListRow = ({ rank, item, genres }: MediaListRowProps) => {
-  const { href, title, posterPath, releaseDate, vote, voteCount, overview } = item;
-  const meta = [formatDate(releaseDate, "yearOnly"), ...genres].filter(Boolean).join(" • ");
+const MediaListRow = ({ rank, year, item, meta, role }: MediaListRowProps) => {
+  const { href, title, posterPath, vote, voteCount, overview } = item;
 
   return (
-    <RowWrapper href={href}>
-      <Rank>{rank}</Rank>
+    <RowWrapper href={href} data-has-year={!!year}>
+      {year ? <RowYear>{year}</RowYear> : <Rank>{rank}</Rank>}
       <RowPoster path={posterPath} size="w185" alt="" />
       <RowInfo>
-        <RowTitle>{title}</RowTitle>
+        <RowHeading>
+          <RowTitle>{title}</RowTitle>
+          {role && <RowRole>{role}</RowRole>}
+        </RowHeading>
         {meta && <RowMeta>{meta}</RowMeta>}
         {!!voteCount &&
           <RowRating>

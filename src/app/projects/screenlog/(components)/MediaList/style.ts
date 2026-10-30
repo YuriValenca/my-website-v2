@@ -69,24 +69,6 @@ export const TotalCount = styled.span`
   color: ${theme.colors.text.placeholder};
 `;
 
-export const ViewToggle = styled.div`
-  display: flex;
-  padding: ${theme.spacing.nano};
-  border: 1px solid ${theme.colors.border.default};
-  border-radius: ${theme.borderRadius.medium};
-`;
-
-export const ViewOption = styled.button<{ isActive: boolean }>`
-  padding: ${theme.spacing.micro} ${theme.spacing.small};
-  border: none;
-  border-radius: ${theme.borderRadius.small};
-  background-color: ${({ isActive }) => (isActive ? theme.colors.background.surfaceHover : "transparent")};
-  font-family: ${theme.fontFamily.noto};
-  font-size: ${theme.fontSize.md};
-  color: ${({ isActive }) => (isActive ? theme.colors.text.primary : theme.colors.text.secondary)};
-  cursor: pointer;
-`;
-
 export const ToolbarActions = styled.div`
   display: flex;
   align-items: center;

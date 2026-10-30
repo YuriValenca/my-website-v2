@@ -6,6 +6,7 @@ import FilterIcon from "../../../../../shared/assets/icons/filterIcon.svg";
 import Spinner from "@/shared/components/Spinner";
 import Modal from "@/shared/components/Modal";
 import { useBreakpoint } from "@/shared/hooks/useBreakpoint";
+import { formatDate } from "@/shared/utils/stringUtils";
 import { DiscoverFilters, getCategoryFilters, toFilterSearchParams } from "../../(helpers)/discoverFilters";
 import DiscoverFiltersPanel from "../DiscoverFiltersPanel";
 import { TOP_RATED_MIN_VOTES } from "../../(api)/movies";
@@ -16,9 +17,10 @@ import { useInfiniteScroll } from "../../(hooks)/useInfiniteScroll";
 import { LIST_CATEGORIES, ListCategory, ListMediaType, screenlogRoutes } from "../../(helpers)/routes";
 import MediaCard from "../MediaCard";
 import MediaListRow from "../MediaListRow";
+import SegmentedControl from "../SegmentedControl";
 import {
   CategoryTab, CategoryTabs, FiltersButton, FiltersSidebar, ListBody, ListDescription, ListTitle, ListToolbar,
-  MediaGrid, MediaListWrapper, MediaRows, ResultsColumn, ToolbarActions, TotalCount, ViewOption, ViewToggle,
+  MediaGrid, MediaListWrapper, MediaRows, ResultsColumn, ToolbarActions, TotalCount,
 } from "./style";
 
 interface MediaListProps {
@@ -61,9 +63,9 @@ const LIST_COPY: Record<ListMediaType, ListCopy> = {
   },
 };
 
-const VIEW_MODES: { mode: ViewMode; label: string }[] = [
-  { mode: "grid", label: "Grid" },
-  { mode: "list", label: "List" },
+const VIEW_MODES: { value: ViewMode; label: string }[] = [
+  { value: "grid", label: "Grid" },
+  { value: "list", label: "List" },
 ];
 
 const MediaList = ({ mediaType, category, filters }: MediaListProps) => {
@@ -104,7 +106,12 @@ const MediaList = ({ mediaType, category, filters }: MediaListProps) => {
       return (
         <MediaRows>
           {items.map((item, index) => (
-            <MediaListRow key={item.id} rank={index + 1} item={item} genres={getGenreNames(item.genreIds)} />
+            <MediaListRow
+              key={item.id}
+              rank={index + 1}
+              item={item}
+              meta={[formatDate(item.releaseDate, "yearOnly"), ...getGenreNames(item.genreIds)].filter(Boolean).join(" • ")}
+            />
           ))}
         </MediaRows>
       );
@@ -153,13 +160,7 @@ const MediaList = ({ mediaType, category, filters }: MediaListProps) => {
               Filters
             </FiltersButton>
           }
-          <ViewToggle>
-            {VIEW_MODES.map(({ mode, label }) => (
-              <ViewOption key={mode} isActive={viewMode === mode} onClick={() => setViewMode(mode)}>
-                {label}
-              </ViewOption>
-            ))}
-          </ViewToggle>
+          <SegmentedControl label="View" options={VIEW_MODES} value={viewMode} onChange={setViewMode} />
         </ToolbarActions>
       </ListToolbar>
       <ListBody>
