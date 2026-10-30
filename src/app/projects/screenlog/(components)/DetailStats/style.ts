@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { theme } from "@/shared/theme/theme";
 
-export const StatsGrid = styled.div`
+export const StatsGrid = styled.div<{ columnCount: number }>`
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(${({ columnCount }) => columnCount}, minmax(0, 1fr));
   gap: ${theme.spacing.xsmall};
 `;
 

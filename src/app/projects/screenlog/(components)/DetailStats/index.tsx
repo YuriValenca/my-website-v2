@@ -3,10 +3,11 @@ import { StatCard, StatLabel, StatsGrid, StatSub, StatValue } from "./style";
 
 interface DetailStatsProps {
   stats: DetailStat[];
+  columns?: number;
 }
 
-const DetailStats = ({ stats }: DetailStatsProps) => (
-  <StatsGrid>
+const DetailStats = ({ stats, columns = 2 }: DetailStatsProps) => (
+  <StatsGrid columnCount={columns}>
     {stats.map(({ label, value, sub }) => (
       <StatCard key={label}>
         <StatLabel>{label}</StatLabel>

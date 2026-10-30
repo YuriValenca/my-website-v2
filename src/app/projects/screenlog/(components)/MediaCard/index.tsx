@@ -1,7 +1,7 @@
 import { formatDate } from "@/shared/utils/stringUtils";
 import {
-  CardGenre, CardOverlay, CardPoster, CardRating, CardTitle,
-  CardYear, MediaCardWrapper, PosterFrame,
+  CardCaption, CardLabel, CardOverlay, CardPoster, CardRating, CardTitle,
+  MediaCardWrapper, PosterFrame,
 } from "./style";
 
 interface MediaCardProps {
@@ -10,19 +10,20 @@ interface MediaCardProps {
   posterPath: string | null;
   releaseDate: string;
   vote: number;
-  genre?: string;
+  label?: string;
+  caption?: string;
 }
 
-const MediaCard = ({ href, title, posterPath, releaseDate, vote, genre }: MediaCardProps) => (
+const MediaCard = ({ href, title, posterPath, releaseDate, vote, label, caption }: MediaCardProps) => (
   <MediaCardWrapper href={href}>
     <PosterFrame>
       <CardPoster path={posterPath} size="w342" alt="" />
       <CardOverlay />
       {!!vote && <CardRating voteValue={vote}>{vote.toFixed(1)}</CardRating>}
-      {genre && <CardGenre>{genre}</CardGenre>}
+      {label && <CardLabel>{label}</CardLabel>}
     </PosterFrame>
     <CardTitle>{title}</CardTitle>
-    <CardYear>{formatDate(releaseDate, "yearOnly")}</CardYear>
+    <CardCaption>{caption || formatDate(releaseDate, "yearOnly")}</CardCaption>
   </MediaCardWrapper>
 );
 

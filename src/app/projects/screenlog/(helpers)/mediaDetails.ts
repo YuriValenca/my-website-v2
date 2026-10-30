@@ -1,6 +1,6 @@
 import { formatCompactCurrency, formatDate } from "@/shared/utils/stringUtils";
-import { CrewMember, Movie, MovieDetails, VideoList } from "../(types)/movies";
-import { Creator, EpisodeSummary, TvShow, TvShowDetails } from "../(types)/tv-shows";
+import { CrewMember, MovieDetails, MovieSummary, VideoList } from "../(types)/movies";
+import { Creator, EpisodeSummary, TvShowDetails, TvShowSummary } from "../(types)/tv-shows";
 import { screenlogRoutes } from "./routes";
 
 export interface DetailStat {
@@ -26,11 +26,13 @@ export interface MediaCardData {
   overview: string;
   genreIds: number[];
   href: string;
+  posterLabel?: string;
+  caption?: string;
 }
 
 const CERTIFICATION_REGION = "US";
 const KEY_CREW_LIMIT = 6;
-const KEY_JOBS = [
+export const KEY_JOBS = [
   "Director",
   "Screenplay",
   "Writer",
@@ -39,10 +41,10 @@ const KEY_JOBS = [
   "Producer",
 ];
 
-const buildStat = (label: string, value: string | null | undefined, sub?: string): DetailStat | null =>
+export const buildStat = (label: string, value: string | null | undefined, sub?: string): DetailStat | null =>
   value ? { label, value, sub } : null;
 
-const isStat = (stat: DetailStat | null): stat is DetailStat => stat !== null;
+export const isStat = (stat: DetailStat | null): stat is DetailStat => stat !== null;
 
 const getLanguageName = (code: string) => {
   if (!code) return null;
@@ -114,7 +116,7 @@ const getKeyCrew = (crew: CrewMember[], creators: Creator[] = []): KeyCrewMember
   return [...people.values()].slice(0, KEY_CREW_LIMIT);
 };
 
-export const toMovieCard = (movie: Movie): MediaCardData => ({
+export const toMovieCard = (movie: MovieSummary): MediaCardData => ({
   id: movie.id,
   title: movie.title,
   posterPath: movie.poster_path,
@@ -126,7 +128,7 @@ export const toMovieCard = (movie: Movie): MediaCardData => ({
   href: screenlogRoutes.movie(movie.id),
 });
 
-export const toTvShowCard = (tvShow: TvShow): MediaCardData => ({
+export const toTvShowCard = (tvShow: TvShowSummary): MediaCardData => ({
   id: tvShow.id,
   title: tvShow.name,
   posterPath: tvShow.poster_path,

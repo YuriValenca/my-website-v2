@@ -9,11 +9,11 @@ import { SeeAllCard, SeeAllFrame, SeeAllLabel } from "./style";
 
 interface MediaCarouselProps {
   items: MediaCardData[];
-  isTVShow: boolean;
+  isTVShow?: boolean;
   seeAllHref?: string;
 }
 
-const MediaCarousel = ({ items, isTVShow, seeAllHref }: MediaCarouselProps) => {
+const MediaCarousel = ({ items, isTVShow = false, seeAllHref }: MediaCarouselProps) => {
   const getGenreNames = useGenreNames(isTVShow);
 
   return (
@@ -23,15 +23,16 @@ const MediaCarousel = ({ items, isTVShow, seeAllHref }: MediaCarouselProps) => {
       controlsTop={theme.spacing.small}
       controlsHeight={`${MEDIA_CARD_POSTER_HEIGHT}px`}
     >
-      {items.map(({ id, href, title, posterPath, releaseDate, vote, genreIds }) => (
+      {items.map(({ href, title, posterPath, releaseDate, vote, genreIds, posterLabel, caption }) => (
         <MediaCard
-          key={id}
+          key={href}
           href={href}
           title={title}
           posterPath={posterPath}
           releaseDate={releaseDate}
           vote={vote}
-          genre={getGenreNames(genreIds)[0]}
+          label={posterLabel ?? getGenreNames(genreIds)[0]}
+          caption={caption}
         />
       ))}
       {seeAllHref &&

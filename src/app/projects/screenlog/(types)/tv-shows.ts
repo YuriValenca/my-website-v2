@@ -31,6 +31,11 @@ export interface TvShow extends MediaBase {
   original_name: string;
 }
 
+export type TvShowSummary = Pick<
+  TvShow,
+  "id" | "name" | "poster_path" | "first_air_date" | "vote_average" | "vote_count" | "overview" | "genre_ids"
+>;
+
 export interface TvShowDetails extends MediaBase {
   name: string;
   first_air_date: string;

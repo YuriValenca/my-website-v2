@@ -20,6 +20,11 @@ export interface Movie extends MediaBase {
   genre_ids: number[];
 }
 
+export type MovieSummary = Pick<
+  Movie,
+  "id" | "title" | "poster_path" | "release_date" | "vote_average" | "vote_count" | "overview" | "genre_ids"
+>;
+
 export interface Genre {
   id: number;
   name: string;

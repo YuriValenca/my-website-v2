@@ -54,7 +54,7 @@ export const CardRating = styled.span<{ voteValue: number }>`
   font-weight: bold;
 `;
 
-export const CardGenre = styled.span`
+export const CardLabel = styled.span`
   position: absolute;
   left: ${theme.spacing.micro};
   right: ${theme.spacing.micro};
@@ -75,7 +75,7 @@ export const CardTitle = styled.p`
   line-height: 1.3;
 `;
 
-export const CardYear = styled.p`
+export const CardCaption = styled.p`
   font-size: ${theme.fontSize.xsm};
   color: ${theme.colors.text.placeholder};
 `;

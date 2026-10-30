@@ -120,7 +120,7 @@ const MediaList = ({ mediaType, category, filters }: MediaListProps) => {
             posterPath={posterPath}
             releaseDate={releaseDate}
             vote={vote}
-            genre={getGenreNames(genreIds)[0]}
+            label={getGenreNames(genreIds)[0]}
           />
         ))}
       </MediaGrid>
