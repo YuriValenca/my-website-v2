@@ -121,6 +121,7 @@ export const theme = {
     h3: "28px",
     h2: "32px",
     h1: "36px",
+    display: "48px",
   },
   breakpoints: {
     xs: "360px",
